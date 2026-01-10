@@ -17,7 +17,7 @@ const { networkName, password, checkoutTime, roomNumber } = Astro.props;
   <!-- Header -->
   <div class="flex items-center justify-between p-4 pb-2 border-b border-[#1a3a40]">
     <h3 class="text-[--color-text] text-base font-bold flex items-center gap-2">
-      <span class="material-symbols-outlined text-[--color-primary]">wifi</span>
+      <span class="material-symbols-outlined text-primary" style="font-size: 16px;">wifi</span>
       Essential Info
     </h3>
     {roomNumber && (
@@ -34,26 +34,26 @@ const { networkName, password, checkoutTime, roomNumber } = Astro.props;
       <div class="space-y-3">
         <!-- Network -->
         <div>
-          <p class="text-[10px] uppercase tracking-wider text-[--color-text-secondary] font-bold mb-0.5">
+          <p class="text-[9px] uppercase tracking-wider text-white/40 font-medium mb-0.5">
             Wi-Fi Network
           </p>
-          <p class="text-[--color-text] font-medium text-sm">{networkName}</p>
+          <p class="text-[--color-text] font-semibold text-sm">{networkName}</p>
         </div>
 
         <!-- Password -->
         <div>
-          <p class="text-[10px] uppercase tracking-wider text-[--color-text-secondary] font-bold mb-0.5">
+          <p class="text-[9px] uppercase tracking-wider text-white/40 font-medium mb-0.5">
             Password
           </p>
-          <div class="flex items-center gap-2">
-            <p class="wifi-password text-[--color-primary] font-bold text-lg tracking-wide">{password}</p>
+          <div class="flex items-center gap-1.5">
+            <p class="wifi-password text-primary font-semibold text-sm">{password}</p>
             <button
               type="button"
               class="copy-btn text-[--color-text-secondary] hover:text-[--color-text] transition-colors"
               data-password={password}
               aria-label="Copy password to clipboard"
             >
-              <span class="material-symbols-outlined text-[18px]">content_copy</span>
+              <span class="material-symbols-outlined filled" style="font-size: 14px;">content_copy</span>
             </button>
           </div>
         </div>
@@ -61,7 +61,7 @@ const { networkName, password, checkoutTime, roomNumber } = Astro.props;
     </div>
 
     <!-- Checkout Column -->
-    <div class="w-[100px] bg-[--color-surface-input] rounded-xl p-3 flex flex-col items-center justify-center gap-1 text-center border border-[#1a3a40]">
+    <div class="w-[100px] bg-white/5 rounded-xl p-3 flex flex-col items-center justify-center gap-1 text-center">
       <span class="material-symbols-outlined text-orange-400 text-[28px]">schedule</span>
       <div>
         <p class="text-[10px] text-[--color-text-secondary]">Checkout</p>

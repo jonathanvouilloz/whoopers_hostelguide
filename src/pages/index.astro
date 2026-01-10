@@ -21,32 +21,36 @@ const categoryImages = {
 ---
 
 <BaseLayout title="Home">
-  <!-- Custom Header -->
-  <header class="flex items-center justify-between px-4 py-3">
-    <div class="flex items-center gap-3">
-      <img
-        src={settings.logo}
-        alt={`${settings.hostelName} logo`}
-        class="size-11 rounded-xl object-cover bg-[--color-surface]"
-      />
-      <div>
-        <p class="text-sm text-[--color-text-secondary]">{greeting}</p>
-        <p class="text-base font-bold text-[--color-text] leading-tight">{settings.hostelName}</p>
-      </div>
-    </div>
-    <a
-      href="/info"
-      class="flex size-10 items-center justify-center rounded-full bg-[--color-surface] text-[--color-text-secondary] hover:bg-[--color-surface-input] transition-colors"
-      aria-label="Help"
-    >
-      <span class="material-symbols-outlined text-[20px]">help</span>
-    </a>
-  </header>
-
-  <!-- Hero Section -->
+  <!-- Hero Section with Header Overlay -->
   <div class="relative w-full">
+    <!-- Gradient overlay at top for header readability -->
+    <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/70 to-transparent z-10 pointer-events-none" />
+
+    <!-- Custom Header (transparent with backdrop blur, overlaying hero) -->
+    <header class="absolute top-0 inset-x-0 z-20 flex items-center justify-between px-4 py-3 backdrop-blur-sm">
+      <div class="flex items-center gap-3">
+        <img
+          src={settings.logo}
+          alt={`${settings.hostelName} logo`}
+          class="size-11 rounded-xl object-cover bg-white/10 backdrop-blur-sm"
+        />
+        <div>
+          <p class="text-sm text-white/70">{greeting}</p>
+          <p class="text-base font-bold text-white leading-tight">{settings.hostelName}</p>
+        </div>
+      </div>
+      <a
+        href="/info"
+        class="flex size-10 items-center justify-center rounded-full text-white/80 hover:text-white transition-colors"
+        aria-label="Help"
+      >
+        <span class="material-symbols-outlined text-[20px]">help</span>
+      </a>
+    </header>
+
+    <!-- Hero Image -->
     <div
-      class="relative w-full h-[280px] bg-cover bg-center"
+      class="relative w-full h-[340px] bg-cover bg-center"
       style={`background-image: linear-gradient(to bottom, rgba(16, 31, 34, 0) 0%, rgba(16, 31, 34, 0.8) 90%, rgba(16, 31, 34, 1) 100%), url("${heroImage}");`}
     >
       <!-- Hero Content -->
