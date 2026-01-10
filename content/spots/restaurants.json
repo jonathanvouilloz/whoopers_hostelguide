@@ -2,17 +2,13 @@
   "spots": [
     {
       "id": "pad-thai-heaven",
-      "name": "Pad Thai Heaven",
-      "description": "Best pad thai in the old city. Family-run, authentic recipes.",
+      "name": "JJ Pad Thai",
+      "description": "Best pad thai near the hostel. They have also other dishes.",
       "cuisineType": "thai",
       "priceRange": "€",
-      "image": "/images/spots/pad-thai-heaven.jpg",
-      "address": "123 Ratchadamnoen Rd, Chiang Mai",
-      "coordinates": {
-        "lat": 18.7883,
-        "lng": 98.9853
-      },
-      "tags": ["local-favorite", "vegetarian-options"]
+      "address": "Jed Yod-Chang Khian Rd, Tambon Chang Phueak, Mueang Chiang Mai District, Chiang Mai 50300",
+      "phone": "0821960265",
+      "openingHours": "11:30 - 22:00"
     }
   ]
 }
