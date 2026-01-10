@@ -8,12 +8,12 @@ import type { Spot, SpotCategory } from '../../lib/types';
 
 export async function getStaticPaths() {
   const allSpots = await getAllSpots();
-  const paths: { params: { id: string }; props: { spot: Spot; category: SpotCategory } }[] = [];
+  const paths: { params: { category: string; id: string }; props: { spot: Spot; category: SpotCategory } }[] = [];
 
   for (const [category, spots] of Object.entries(allSpots)) {
     for (const spot of spots) {
       paths.push({
-        params: { id: spot.id },
+        params: { category, id: spot.id },
         props: { spot, category: category as SpotCategory },
       });
     }

@@ -3,14 +3,15 @@
  * SpotCard - Restaurant/Bar/Service listing card
  * Redesigned with OPEN/CLOSED badge and distance overlay
  */
-import type { Spot } from '../lib/types';
+import type { Spot, SpotCategory } from '../lib/types';
 import { isOpen } from '../lib/openingHours';
 
 interface Props {
   spot: Spot;
+  category: SpotCategory;
 }
 
-const { spot } = Astro.props;
+const { spot, category } = Astro.props;
 
 // Check if spot is currently open
 const openStatus = isOpen(spot.openingHours);
@@ -19,7 +20,7 @@ const openStatus = isOpen(spot.openingHours);
 const coords = spot.coordinates || spot.location;
 ---
 
-<a href={`/spot/${spot.id}`} class="spot-card group" data-cuisine={spot.cuisineType || ''}>
+<a href={`/${category}/${spot.id}`} class="spot-card group" data-cuisine={spot.cuisineType || ''}>
   <article class="relative flex flex-col overflow-hidden rounded-xl bg-white/5 transition-transform active:scale-[0.99]">
     <!-- Closed overlay (full card) -->
     {openStatus === false && (
