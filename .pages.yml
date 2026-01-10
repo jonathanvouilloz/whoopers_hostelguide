@@ -1,0 +1,418 @@
+# PagesCMS Configuration
+# https://pagescms.org
+
+content:
+  - name: settings
+    label: "⚙️ Settings"
+    path: content/settings.json
+    type: file
+    fields:
+      - name: hostelName
+        label: Hostel Name
+        type: string
+        required: true
+      - name: logo
+        label: Logo
+        type: image
+        options:
+          path: public/images
+      - name: primaryColor
+        label: Primary Color
+        type: string
+        options:
+          format: color
+      - name: accentColor
+        label: Accent Color
+        type: string
+        options:
+          format: color
+      - name: wifi
+        label: WiFi
+        type: object
+        fields:
+          - name: name
+            label: Network Name
+            type: string
+          - name: password
+            label: Password
+            type: string
+      - name: checkIn
+        label: Check-in Time
+        type: string
+        description: "Format: HH:MM (e.g. 14:00)"
+      - name: checkOut
+        label: Check-out Time
+        type: string
+        description: "Format: HH:MM (e.g. 11:00)"
+      - name: contactWhatsApp
+        label: WhatsApp Number
+        type: string
+        description: "Include country code, e.g. +66812345678"
+      - name: emergencyContacts
+        label: Emergency Contacts
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Name
+            type: string
+          - name: phone
+            label: Phone
+            type: string
+      - name: timezone
+        label: Timezone
+        type: string
+        description: "e.g. Asia/Bangkok"
+
+  - name: house-rules
+    label: "📋 House Rules"
+    path: content/house-rules.md
+    type: file
+    fields:
+      - name: content
+        label: Content
+        type: rich-text
+
+  - name: how-to-get-here
+    label: "🗺️ How to Get Here"
+    path: content/how-to-get-here.md
+    type: file
+    fields:
+      - name: content
+        label: Content
+        type: rich-text
+
+  - name: restaurants
+    label: "🍜 Restaurants"
+    path: content/spots/restaurants.json
+    type: file
+    fields:
+      - name: spots
+        label: Spots
+        type: object
+        list: true
+        fields:
+          - name: id
+            label: ID
+            type: string
+            required: true
+            description: "Unique slug (e.g. pad-thai-heaven)"
+          - name: name
+            label: Name
+            type: string
+            required: true
+          - name: description
+            label: Description
+            type: text
+          - name: cuisineType
+            label: Cuisine Type
+            type: select
+            options:
+              values:
+                - thai
+                - western
+                - japanese
+                - indian
+                - chinese
+                - vietnamese
+                - italian
+                - cafe
+                - vegetarian
+                - international
+          - name: priceRange
+            label: Price Range
+            type: select
+            options:
+              values:
+                - €
+                - €€
+                - €€€
+          - name: address
+            label: Address
+            type: string
+          - name: location
+            label: Location
+            type: object
+            fields:
+              - name: lat
+                label: Latitude
+                type: number
+              - name: lng
+                label: Longitude
+                type: number
+          - name: image
+            label: Image
+            type: image
+            options:
+              path: public/images/spots
+          - name: phone
+            label: Phone
+            type: string
+          - name: openingHours
+            label: Opening Hours
+            type: string
+            description: "e.g. 10:00-22:00"
+
+  - name: bars
+    label: "🍺 Bars"
+    path: content/spots/bars.json
+    type: file
+    fields:
+      - name: spots
+        label: Spots
+        type: object
+        list: true
+        fields:
+          - name: id
+            label: ID
+            type: string
+            required: true
+          - name: name
+            label: Name
+            type: string
+            required: true
+          - name: description
+            label: Description
+            type: text
+          - name: priceRange
+            label: Price Range
+            type: select
+            options:
+              values:
+                - €
+                - €€
+                - €€€
+          - name: address
+            label: Address
+            type: string
+          - name: location
+            label: Location
+            type: object
+            fields:
+              - name: lat
+                label: Latitude
+                type: number
+              - name: lng
+                label: Longitude
+                type: number
+          - name: image
+            label: Image
+            type: image
+            options:
+              path: public/images/spots
+          - name: openingHours
+            label: Opening Hours
+            type: string
+
+  - name: laundry
+    label: "🧺 Laundry"
+    path: content/spots/laundry.json
+    type: file
+    fields:
+      - name: spots
+        label: Spots
+        type: object
+        list: true
+        fields:
+          - name: id
+            label: ID
+            type: string
+            required: true
+          - name: name
+            label: Name
+            type: string
+            required: true
+          - name: description
+            label: Description
+            type: text
+          - name: priceRange
+            label: Price Range
+            type: select
+            options:
+              values:
+                - €
+                - €€
+                - €€€
+          - name: address
+            label: Address
+            type: string
+          - name: location
+            label: Location
+            type: object
+            fields:
+              - name: lat
+                label: Latitude
+                type: number
+              - name: lng
+                label: Longitude
+                type: number
+          - name: image
+            label: Image
+            type: image
+            options:
+              path: public/images/spots
+          - name: phone
+            label: Phone
+            type: string
+          - name: openingHours
+            label: Opening Hours
+            type: string
+
+  - name: transport
+    label: "🛵 Transport"
+    path: content/spots/transport.json
+    type: file
+    fields:
+      - name: spots
+        label: Spots
+        type: object
+        list: true
+        fields:
+          - name: id
+            label: ID
+            type: string
+            required: true
+          - name: name
+            label: Name
+            type: string
+            required: true
+          - name: description
+            label: Description
+            type: text
+          - name: priceRange
+            label: Price Range
+            type: select
+            options:
+              values:
+                - €
+                - €€
+                - €€€
+          - name: address
+            label: Address
+            type: string
+          - name: location
+            label: Location
+            type: object
+            fields:
+              - name: lat
+                label: Latitude
+                type: number
+              - name: lng
+                label: Longitude
+                type: number
+          - name: image
+            label: Image
+            type: image
+            options:
+              path: public/images/spots
+          - name: phone
+            label: Phone
+            type: string
+
+  - name: activities
+    label: "🎯 Activities"
+    path: content/spots/activities.json
+    type: file
+    fields:
+      - name: spots
+        label: Spots
+        type: object
+        list: true
+        fields:
+          - name: id
+            label: ID
+            type: string
+            required: true
+          - name: name
+            label: Name
+            type: string
+            required: true
+          - name: description
+            label: Description
+            type: text
+          - name: priceRange
+            label: Price Range
+            type: select
+            options:
+              values:
+                - €
+                - €€
+                - €€€
+          - name: address
+            label: Address
+            type: string
+          - name: location
+            label: Location
+            type: object
+            fields:
+              - name: lat
+                label: Latitude
+                type: number
+              - name: lng
+                label: Longitude
+                type: number
+          - name: image
+            label: Image
+            type: image
+            options:
+              path: public/images/spots
+          - name: phone
+            label: Phone
+            type: string
+
+  - name: events
+    label: "📅 Events"
+    path: content/events.json
+    type: file
+    fields:
+      - name: events
+        label: Events
+        type: object
+        list: true
+        fields:
+          - name: id
+            label: ID
+            type: string
+            required: true
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: description
+            label: Description
+            type: text
+          - name: date
+            label: Date
+            type: date
+            required: true
+          - name: startTime
+            label: Start Time
+            type: string
+            description: "Format: HH:MM"
+          - name: endTime
+            label: End Time
+            type: string
+            description: "Format: HH:MM"
+          - name: location
+            label: Location
+            type: string
+          - name: ctaType
+            label: CTA Type
+            type: select
+            options:
+              values:
+                - whatsapp
+                - link
+                - none
+          - name: ctaLabel
+            label: CTA Label
+            type: string
+            description: "e.g. Book Now, Join Us"
+          - name: ctaValue
+            label: CTA Value
+            type: string
+            description: "WhatsApp number or URL"
+
+media:
+  input: public/images
+  output: public/images
