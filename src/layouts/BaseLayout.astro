@@ -12,6 +12,9 @@ const { title, description, showNav = true } = Astro.props;
 
 const settings = await getSettings();
 
+// Dynamic theme colors from settings.json
+const { primaryColor, accentColor } = settings;
+
 const pageTitle = title
   ? `${title} | ${settings.hostelName}`
   : settings.hostelName;
@@ -54,6 +57,16 @@ const themeColor = '#101f22';
     <script is:inline src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
 
     <title>{pageTitle}</title>
+
+    <!-- Dynamic theme colors from settings.json -->
+    <style set:html={`
+      :root {
+        --color-primary: ${primaryColor};
+        --color-primary-dark: color-mix(in srgb, ${primaryColor} 80%, black);
+        --color-accent: ${accentColor};
+        --color-primary-glow: ${primaryColor}4d;
+      }
+    `}></style>
   </head>
 
   <body class="min-h-screen antialiased overflow-x-hidden">

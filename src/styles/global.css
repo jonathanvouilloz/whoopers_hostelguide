@@ -30,6 +30,9 @@
   --color-warning: #f59e0b;
   --color-error: #ef4444;
 
+  /* Glow effect (will be overridden by dynamic injection) */
+  --color-primary-glow: rgba(19, 200, 236, 0.3);
+
   /* Spacing & Sizing */
   --radius: 0.5rem;
   --radius-lg: 1rem;
@@ -81,7 +84,7 @@ body {
   transition: all 0.2s;
   background-color: var(--color-primary);
   color: var(--color-bg);
-  box-shadow: 0 0 15px rgba(19, 200, 236, 0.3);
+  box-shadow: 0 0 15px var(--color-primary-glow);
 }
 
 .btn-primary:hover {
@@ -388,7 +391,7 @@ body {
 
 .timeline-icon-inactive {
   background-color: var(--color-surface);
-  border-color: rgba(19, 200, 236, 0.3);
+  border-color: var(--color-primary-glow);
   color: var(--color-text-secondary);
 }
 
