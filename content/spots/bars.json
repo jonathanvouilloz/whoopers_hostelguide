@@ -1,3 +1,37 @@
 {
-  "spots": []
+  "spots": [
+    {
+      "name": "Zoe in Yellow",
+      "description": "The most famous backpacker party street in Chiang Mai! Multiple bars with cheap drinks (60 THB beers, 100 THB cocktails), loud music, and a young international crowd. Busiest on weekends.",
+      "priceRange": "€",
+      "address": "Ratvithi Road Soi 1, Old City",
+      "location": {
+        "lat": 18.7883,
+        "lng": 98.9933
+      },
+      "openingHours": "18:00-02:00"
+    },
+    {
+      "name": "Warm Up Café",
+      "description": "Chiang Mai's most popular nightclub! Live bands early evening, then DJ sets until late. Great mix of locals and tourists. Cover charge on weekends (200 THB includes 1 drink).",
+      "priceRange": "€€",
+      "address": "Nimmanhaemin Road Soi 9",
+      "location": {
+        "lat": 18.7975,
+        "lng": 98.9678
+      },
+      "openingHours": "18:00-01:00"
+    },
+    {
+      "name": "THC Rooftop Bar",
+      "description": "Chill rooftop bar with amazing views of Doi Suthep mountain. Perfect for sunset drinks. Good cocktails, relaxed vibe, and occasional live acoustic music. Happy hour 5-7pm.",
+      "priceRange": "€€",
+      "address": "Nimmanhaemin Road Soi 13",
+      "location": {
+        "lat": 18.7998,
+        "lng": 98.9671
+      },
+      "openingHours": "17:00-00:00"
+    }
+  ]
 }

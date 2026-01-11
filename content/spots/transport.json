@@ -1,3 +1,26 @@
 {
-  "spots": []
+  "spots": [
+    {
+      "name": "Grab",
+      "description": "The most reliable ride-hailing app in Thailand. Download the app, add your card or pay cash. Prices are fixed and shown upfront. Airport to Old City: around 150-200 THB.",
+      "priceRange": "€€",
+      "address": "Download on App Store or Google Play"
+    },
+    {
+      "name": "Bolt",
+      "description": "Alternative to Grab, often 10-20% cheaper! Same concept - book via app, pay by card or cash. Good for short trips around the city. Sometimes has promo codes for new users.",
+      "priceRange": "€",
+      "address": "Download on App Store or Google Play"
+    },
+    {
+      "name": "Red Songthaew",
+      "description": "Iconic red pickup trucks that work as shared taxis. Flag one down, tell them where you're going, negotiate price (usually 30-50 THB within Old City). Fun local experience!",
+      "priceRange": "€",
+      "address": "Flag down anywhere on main roads",
+      "location": {
+        "lat": 18.7883,
+        "lng": 98.9866
+      }
+    }
+  ]
 }

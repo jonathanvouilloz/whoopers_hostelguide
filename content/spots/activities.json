@@ -1,3 +1,36 @@
 {
-  "spots": []
+  "spots": [
+    {
+      "name": "Elephant Nature Park",
+      "description": "Ethical elephant sanctuary where you can feed, walk with, and bathe rescued elephants. Full day trip includes lunch and hotel pickup. Book at least 1 day in advance.",
+      "priceRange": "€€€",
+      "address": "209/2 Sridom Chai Road, Mae Rim, Chiang Mai",
+      "location": {
+        "lat": 19.1574,
+        "lng": 98.8479
+      },
+      "phone": "+66532729855"
+    },
+    {
+      "name": "Thai Cooking Class",
+      "description": "Learn to cook authentic Thai dishes! Start with a market tour to pick fresh ingredients, then cook 5 dishes including pad thai, curry, and mango sticky rice. Classes daily at 9am and 2pm.",
+      "priceRange": "€€",
+      "address": "Somphet Market, Moon Muang Road Soi 6, Old City",
+      "location": {
+        "lat": 18.7918,
+        "lng": 98.9936
+      },
+      "phone": "+66812345678"
+    },
+    {
+      "name": "Game Night",
+      "description": "Join us every evening for board games, card games, and drinks! We have over 50 games including Catan, Uno, Exploding Kittens, and more. Free to play, just buy your drinks.",
+      "priceRange": "€",
+      "address": "Whoopers Hostel - Common Area",
+      "location": {
+        "lat": 18.8023,
+        "lng": 98.9678
+      }
+    }
+  ]
 }

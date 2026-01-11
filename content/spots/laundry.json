@@ -1,3 +1,39 @@
 {
-  "spots": []
+  "spots": [
+    {
+      "name": "Speedy Laundry",
+      "description": "Same-day laundry service! Drop off before 10am, pick up by 6pm. 40 THB per kg, wash and fold included. They also do dry cleaning for delicate items.",
+      "priceRange": "€",
+      "address": "Huay Kaew Road Soi 2, near Maya Mall",
+      "location": {
+        "lat": 18.8012,
+        "lng": 98.9672
+      },
+      "phone": "+66891234567",
+      "openingHours": "08:00-20:00"
+    },
+    {
+      "name": "AIS SIM Card Shop",
+      "description": "Get a Thai SIM card with unlimited data! Tourist package: 299 THB for 15 days unlimited 4G. Bring your passport. They speak English and can help set it up.",
+      "priceRange": "€",
+      "address": "Central Festival Chiang Mai, Ground Floor",
+      "location": {
+        "lat": 18.8073,
+        "lng": 98.9678
+      },
+      "phone": "+6653999111",
+      "openingHours": "10:00-21:00"
+    },
+    {
+      "name": "7-Eleven ATM",
+      "description": "Nearest ATM that accepts international cards (Visa, Mastercard). Withdrawal fee is 220 THB. Max withdrawal 20,000 THB per transaction.",
+      "priceRange": "€",
+      "address": "Jed Yod Road, 50m from hostel",
+      "location": {
+        "lat": 18.8025,
+        "lng": 98.9682
+      },
+      "openingHours": "00:00-23:59"
+    }
+  ]
 }

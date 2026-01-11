@@ -123,11 +123,6 @@ content:
         type: object
         list: true
         fields:
-          - name: id
-            label: ID
-            type: string
-            required: true
-            description: "Unique slug (e.g. pad-thai-heaven)"
           - name: name
             label: Name
             type: string
@@ -230,10 +225,6 @@ content:
         type: object
         list: true
         fields:
-          - name: id
-            label: ID
-            type: string
-            required: true
           - name: name
             label: Name
             type: string
@@ -281,10 +272,6 @@ content:
         type: object
         list: true
         fields:
-          - name: id
-            label: ID
-            type: string
-            required: true
           - name: name
             label: Name
             type: string
@@ -335,10 +322,6 @@ content:
         type: object
         list: true
         fields:
-          - name: id
-            label: ID
-            type: string
-            required: true
           - name: name
             label: Name
             type: string
@@ -386,10 +369,6 @@ content:
         type: object
         list: true
         fields:
-          - name: id
-            label: ID
-            type: string
-            required: true
           - name: name
             label: Name
             type: string
@@ -437,11 +416,6 @@ content:
         type: object
         list: true
         fields:
-          - name: id
-            label: ID
-            type: string
-            required: true
-            description: "Unique slug (e.g. cooking-class)"
           - name: title
             label: Title
             type: string

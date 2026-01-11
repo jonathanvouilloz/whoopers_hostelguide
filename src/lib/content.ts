@@ -8,6 +8,23 @@ import type {
 } from './types';
 
 // ============================================
+// Utilities
+// ============================================
+
+/**
+ * Generate a URL-safe slug from a string
+ * Example: "Thai Cooking Class" -> "thai-cooking-class"
+ */
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // Remove accents
+    .replace(/[^a-z0-9]+/g, '-')      // Replace non-alphanumeric with hyphens
+    .replace(/^-+|-+$/g, '');         // Remove leading/trailing hyphens
+}
+
+// ============================================
 // Settings
 // ============================================
 
@@ -49,7 +66,12 @@ export async function getSpots(category: SpotCategory): Promise<Spot[]> {
   }
 
   const data = rawData as { spots: Spot[] };
-  return data.spots;
+
+  // Auto-generate IDs from name if not provided
+  return data.spots.map((spot) => ({
+    ...spot,
+    id: spot.id || slugify(spot.name),
+  }));
 }
 
 export async function getSpotById(category: SpotCategory, id: string): Promise<Spot | undefined> {
@@ -98,7 +120,12 @@ export async function findSpotById(
 export async function getEvents(): Promise<HostelEvent[]> {
   const data = await import('../../content/events.json');
   const eventsFile = data.default as EventsFile;
-  return eventsFile.events;
+
+  // Auto-generate IDs from title if not provided
+  return eventsFile.events.map((event) => ({
+    ...event,
+    id: event.id || slugify(event.title),
+  }));
 }
 
 export async function getEventById(id: string): Promise<HostelEvent | undefined> {
