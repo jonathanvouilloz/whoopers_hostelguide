@@ -26,9 +26,9 @@
   ],
   "timezone": "Asia/Bangkok",
   "categoryImages": {
-    "food": "/images/category-food",
-    "activities": "/images/category-activities",
-    "services": "/images/category-services",
-    "bars": "/images/category-bars"
+    "food": "/images/category-food.jpg",
+    "activities": "/images/category-activities.jpg",
+    "services": "/images/category-services.jpg",
+    "bars": "/images/category-bars.jpg"
   }
 }
