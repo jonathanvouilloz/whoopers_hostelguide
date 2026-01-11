@@ -8,13 +8,8 @@
       "startTime": "14:00",
       "endTime": "17:00",
       "location": "Hostel Kitchen",
-      "price": "500 THB",
-      "cta": {
-        "type": "whatsapp",
-        "label": "Book your spot",
-        "url": "+66812345678",
-        "message": "Hi! I'd like to join the Cooking Class on January 15th"
-      }
+      "ctaType": "link",
+      "ctaLabel": "Book Now"
     }
   ]
 }
