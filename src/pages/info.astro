@@ -70,11 +70,13 @@ const heroImage = '/images/hero-info.jpg';
       <h3 class="text-sm font-semibold text-(--color-text-secondary) uppercase tracking-wider mb-3">Detailed Guide</h3>
       <div class="space-y-3">
         <!-- House Rules -->
-        <AccordionItem icon="gavel" title="House Rules">
-          <div class="prose-dark space-y-3 text-sm text-(--color-text-secondary)">
-            <HouseRules />
-          </div>
-        </AccordionItem>
+        <div data-tour="house-rules">
+          <AccordionItem icon="gavel" title="House Rules">
+            <div class="prose-dark space-y-3 text-sm text-(--color-text-secondary)">
+              <HouseRules />
+            </div>
+          </AccordionItem>
+        </div>
 
         <!-- How to Get Here -->
         <AccordionItem icon="directions" title="How to Get Here">
@@ -109,6 +111,21 @@ const heroImage = '/images/hero-info.jpg';
         </AccordionItem>
       </div>
     </section>
+
+    <!-- App Tour -->
+    <section>
+      <h3 class="text-sm font-semibold text-(--color-text-secondary) uppercase tracking-wider mb-3">App Tour</h3>
+      <button
+        id="replay-tour-btn"
+        class="w-full flex items-center gap-4 rounded-xl bg-white/5 p-4 active:scale-[0.98] transition-transform"
+      >
+        <span class="material-symbols-outlined text-(--color-primary) text-[28px]">play_circle</span>
+        <div class="text-left">
+          <h2 class="text-(--color-text) text-base font-bold leading-tight">Replay App Tour</h2>
+          <p class="text-(--color-text-secondary) text-xs mt-1">See the quick guide again</p>
+        </div>
+      </button>
+    </section>
   </main>
 
   <!-- Copy toast -->
@@ -119,6 +136,11 @@ const heroImage = '/images/hero-info.jpg';
 </BaseLayout>
 
 <script>
+  import { resetOnboarding, runTourForPage } from '../lib/onboarding';
+
+  // Run onboarding tour for info page (final step)
+  runTourForPage('info');
+
   // WiFi copy functionality
   document.querySelectorAll('.quick-card[data-password]').forEach((btn) => {
     btn.addEventListener('click', async () => {
@@ -137,6 +159,11 @@ const heroImage = '/images/hero-info.jpg';
         console.error('Failed to copy:', err);
       }
     });
+  });
+
+  // Replay tour functionality
+  document.getElementById('replay-tour-btn')?.addEventListener('click', () => {
+    resetOnboarding();
   });
 </script>
 

@@ -424,3 +424,79 @@ body {
   border-color: var(--color-primary);
   color: var(--color-text);
 }
+
+/* ============================================
+   Driver.js Onboarding Tour Theme
+   ============================================ */
+
+.driver-popover.hostelguide-tour {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border-light);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.driver-popover.hostelguide-tour .driver-popover-title {
+  color: var(--color-text);
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.driver-popover.hostelguide-tour .driver-popover-description {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.driver-popover.hostelguide-tour .driver-popover-progress-text {
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-right: 1rem;
+}
+
+.driver-popover.hostelguide-tour .driver-popover-prev-btn,
+.driver-popover.hostelguide-tour .driver-popover-next-btn {
+  background-color: var(--color-primary);
+  color: var(--color-bg) !important;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: var(--radius-lg);
+  padding: 0.5rem 1rem;
+  border: none;
+  transition: background-color 0.2s;
+  text-shadow: none !important;
+  -webkit-text-stroke: 0 !important;
+}
+
+.driver-popover.hostelguide-tour .driver-popover-prev-btn:hover,
+.driver-popover.hostelguide-tour .driver-popover-next-btn:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.driver-popover.hostelguide-tour .driver-popover-prev-btn {
+  background-color: transparent !important;
+  color: var(--color-primary) !important;
+  border: 1px solid var(--color-primary) !important;
+}
+
+.driver-popover.hostelguide-tour .driver-popover-prev-btn:hover {
+  background-color: var(--color-primary) !important;
+  color: var(--color-bg) !important;
+}
+
+.driver-popover.hostelguide-tour .driver-popover-close-btn {
+  color: var(--color-text-secondary);
+}
+
+.driver-popover.hostelguide-tour .driver-popover-close-btn:hover {
+  color: var(--color-text);
+}
+
+.driver-popover.hostelguide-tour .driver-popover-arrow-side-left.driver-popover-arrow,
+.driver-popover.hostelguide-tour .driver-popover-arrow-side-right.driver-popover-arrow,
+.driver-popover.hostelguide-tour .driver-popover-arrow-side-top.driver-popover-arrow,
+.driver-popover.hostelguide-tour .driver-popover-arrow-side-bottom.driver-popover-arrow {
+  border-color: var(--color-surface);
+}

@@ -49,6 +49,10 @@ const themeColor = '#101f22';
     <!-- Material Symbols -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 
+    <!-- Driver.js for onboarding tour -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css" />
+    <script is:inline src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+
     <title>{pageTitle}</title>
   </head>
 
@@ -66,16 +70,16 @@ const themeColor = '#101f22';
     </main>
 
     {showNav && (
-      <nav class="bottom-nav">
+      <nav data-tour="nav" class="bottom-nav">
         <a href="/" class="nav-item" data-page="home">
           <span class="material-symbols-outlined">home</span>
           <span class="nav-label">Home</span>
         </a>
-        <a href="/explore" class="nav-item" data-page="explore">
+        <a href="/explore" class="nav-item" data-page="explore" data-tour="nav-explore">
           <span class="material-symbols-outlined">explore</span>
           <span class="nav-label">Explore</span>
         </a>
-        <a href="/events" class="nav-item" data-page="events">
+        <a href="/events" class="nav-item" data-page="events" data-tour="nav-events">
           <span class="material-symbols-outlined">calendar_month</span>
           <span class="nav-label">Events</span>
         </a>

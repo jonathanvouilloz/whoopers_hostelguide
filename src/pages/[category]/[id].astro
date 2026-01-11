@@ -172,6 +172,7 @@ function capitalize(str: string): string {
           target="_blank"
           rel="noopener noreferrer"
           class="btn-primary flex-1 touch-target"
+          data-tour="directions-btn"
         >
           <span class="material-symbols-outlined text-[20px]">directions</span>
           <span>Get Directions</span>
@@ -197,6 +198,10 @@ function capitalize(str: string): string {
 
 <script>
   import { initDistanceDisplay } from '../../lib/geolocation';
+  import { runTourForPage } from '../../lib/onboarding';
+
+  // Run onboarding tour for spot detail page
+  runTourForPage('spot-detail');
 
   // Copy address functionality
   document.querySelectorAll('.copy-btn').forEach((btn) => {

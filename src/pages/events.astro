@@ -75,7 +75,7 @@ function formatTimeDisplay(startTime: string | null): string {
 
   <main class="flex flex-col px-4 pt-4 pb-24">
     <!-- Events Timeline -->
-    <div class="relative" id="events-container">
+    <div class="relative" id="events-container" data-tour="events-list">
       <!-- Timeline vertical line -->
       <div class="timeline-line"></div>
 
@@ -147,6 +147,11 @@ function formatTimeDisplay(startTime: string | null): string {
 </style>
 
 <script>
+  import { runTourForPage } from '../lib/onboarding';
+
+  // Run onboarding tour for events page
+  runTourForPage('events');
+
   document.addEventListener('DOMContentLoaded', () => {
     const chips = document.querySelectorAll('#day-chips .day-chip');
     const eventItems = document.querySelectorAll('.event-item');

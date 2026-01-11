@@ -68,8 +68,14 @@ function capitalize(str: string): string {
     <!-- Spots List -->
     {spots.length > 0 ? (
       <div class="space-y-4">
-        {spots.map((spot) => (
-          <SpotCard spot={spot} category="restaurants" />
+        {spots.map((spot, index) => (
+          index === 0 ? (
+            <div data-tour="first-spot" data-spot-url={`/restaurants/${spot.id}`}>
+              <SpotCard spot={spot} category="restaurants" />
+            </div>
+          ) : (
+            <SpotCard spot={spot} category="restaurants" />
+          )
         ))}
       </div>
     ) : (
@@ -108,6 +114,14 @@ function capitalize(str: string): string {
 
 <script>
   import { initDistanceDisplay } from '../lib/geolocation';
+  import { runTourForPage } from '../lib/onboarding';
+
+  // Get first spot URL for onboarding navigation
+  const firstSpotEl = document.querySelector('[data-tour="first-spot"]');
+  const firstSpotUrl = firstSpotEl?.getAttribute('data-spot-url') || '/restaurants/pad-thai-heaven';
+
+  // Run onboarding tour for restaurants page
+  runTourForPage('restaurants', { firstSpotUrl });
 
   // Initialize filter chips based on URL
   function initFilters() {
