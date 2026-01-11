@@ -19,10 +19,10 @@ const {
 ---
 
 <details
-  class="accordion group rounded-xl bg-white/5 overflow-hidden transition-all"
+  class="accordion group rounded-xl bg-(--color-surface-subtle) overflow-hidden transition-all"
   open={defaultOpen}
 >
-  <summary class="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 select-none hover:bg-white/5 transition-colors">
+  <summary class="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 select-none hover:bg-(--color-surface-hover) transition-colors">
     <div class="flex items-center gap-3">
       <span class:list={['material-symbols-outlined', iconColor]}>{icon}</span>
       <span class="text-base font-bold text-(--color-text)">{title}</span>
@@ -32,7 +32,7 @@ const {
     </span>
   </summary>
 
-  <div class="accordion-content px-5 pb-5 pt-2 border-t border-white/10">
+  <div class="accordion-content px-5 pb-5 pt-2 border-t border-(--color-separator)">
     <slot />
   </div>
 </details>

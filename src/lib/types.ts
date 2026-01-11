@@ -8,11 +8,15 @@ export interface ThemePalette {
   bg: string;
   surface: string;
   surfaceInput: string;
+  surfaceSubtle: string;
+  surfaceHover: string;
   text: string;
   textSecondary: string;
+  textMuted: string;
   muted: string;
   border: string;
   borderLight: string;
+  separator: string;
   accent: string;
   accentDark: string;
   accentGlow: string;
@@ -23,11 +27,15 @@ export const THEME_PALETTES: Record<ThemeMode, ThemePalette> = {
     bg: '#F8F9FA',           // Pearl White
     surface: '#FFFFFF',       // Pure White
     surfaceInput: '#E5E7EB',
+    surfaceSubtle: '#EFEFEF', // Visible subtle bg on light
+    surfaceHover: '#E5E5E5',  // Hover state
     text: '#1A202C',          // Deep Slate
     textSecondary: '#718096', // Cool Grey
+    textMuted: '#9CA3AF',     // Labels, captions
     muted: '#9CA3AF',
     border: 'rgba(0, 0, 0, 0.05)',
     borderLight: 'rgba(0, 0, 0, 0.1)',
+    separator: 'rgba(0, 0, 0, 0.08)',
     accent: '#008080',        // Thai Teal (default, overridable by primaryColor)
     accentDark: '#006666',
     accentGlow: 'rgba(0, 128, 128, 0.2)',
@@ -36,11 +44,15 @@ export const THEME_PALETTES: Record<ThemeMode, ThemePalette> = {
     bg: '#0F172A',            // Midnight Ocean
     surface: '#1E293B',       // Deep Navy
     surfaceInput: '#334155',
+    surfaceSubtle: 'rgba(255, 255, 255, 0.05)', // Subtle bg on dark
+    surfaceHover: 'rgba(255, 255, 255, 0.1)',   // Hover state
     text: '#F1F5F9',          // Cloud Grey
     textSecondary: '#94A3B8', // Muted Blue
+    textMuted: 'rgba(255, 255, 255, 0.4)',      // Labels, captions
     muted: '#64748B',
     border: 'rgba(255, 255, 255, 0.05)',
     borderLight: 'rgba(255, 255, 255, 0.1)',
+    separator: 'rgba(255, 255, 255, 0.1)',
     accent: '#2DD4BF',        // Bright Aqua (default, overridable by primaryColor)
     accentDark: '#14B8A6',
     accentGlow: 'rgba(45, 212, 191, 0.3)',

@@ -21,7 +21,7 @@ const { networkName, password, checkoutTime, roomNumber } = Astro.props;
       Essential Info
     </h3>
     {roomNumber && (
-      <span class="text-xs font-medium text-(--color-text-secondary) bg-white/5 px-2 py-1 rounded-lg">
+      <span class="text-xs font-medium text-(--color-text-secondary) bg-(--color-surface-subtle) px-2 py-1 rounded-lg">
         Room {roomNumber}
       </span>
     )}
@@ -34,7 +34,7 @@ const { networkName, password, checkoutTime, roomNumber } = Astro.props;
       <div class="space-y-3">
         <!-- Network -->
         <div>
-          <p class="text-[9px] uppercase tracking-wider text-white/40 font-medium mb-0.5">
+          <p class="text-[9px] uppercase tracking-wider text-(--color-text-muted) font-medium mb-0.5">
             Wi-Fi Network
           </p>
           <p class="text-(--color-text) font-semibold text-sm">{networkName}</p>
@@ -42,7 +42,7 @@ const { networkName, password, checkoutTime, roomNumber } = Astro.props;
 
         <!-- Password -->
         <div>
-          <p class="text-[9px] uppercase tracking-wider text-white/40 font-medium mb-0.5">
+          <p class="text-[9px] uppercase tracking-wider text-(--color-text-muted) font-medium mb-0.5">
             Password
           </p>
           <div class="flex items-center gap-1.5">
@@ -61,7 +61,7 @@ const { networkName, password, checkoutTime, roomNumber } = Astro.props;
     </div>
 
     <!-- Checkout Column -->
-    <div class="w-[100px] bg-white/5 rounded-xl p-3 flex flex-col items-center justify-center gap-1 text-center">
+    <div class="w-[100px] bg-(--color-surface-subtle) rounded-xl p-3 flex flex-col items-center justify-center gap-1 text-center">
       <span class="material-symbols-outlined text-orange-400 text-[28px]">schedule</span>
       <div>
         <p class="text-[10px] text-(--color-text-secondary)">Checkout</p>

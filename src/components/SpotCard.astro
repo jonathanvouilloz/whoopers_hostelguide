@@ -21,7 +21,7 @@ const coords = spot.coordinates || spot.location;
 ---
 
 <a href={`/${category}/${spot.id}`} class="spot-card group" data-cuisine={spot.cuisineType || ''} data-bar-type={spot.barType || ''}>
-  <article class="relative flex flex-col overflow-hidden rounded-xl bg-white/5 transition-transform active:scale-[0.99]">
+  <article class="relative flex flex-col overflow-hidden rounded-xl bg-(--color-surface-subtle) transition-transform active:scale-[0.99]">
     <!-- Closed overlay (full card) -->
     {openStatus === false && (
       <div class="absolute inset-0 bg-black/70 z-10 flex items-center justify-center rounded-xl">
@@ -69,7 +69,7 @@ const coords = spot.coordinates || spot.location;
       )}
 
       <!-- Separator -->
-      <div class="h-px w-full bg-white/10 my-2"></div>
+      <div class="h-px w-full bg-(--color-separator) my-2"></div>
 
       <!-- Footer Row -->
       <div class="flex items-center justify-between text-sm">
