@@ -1,6 +1,6 @@
 {
-  "hostelName": "Chill House Chiang Mai",
-  "logo": "/images/logo.png",
+  "hostelName": "Whoopers Hostel Chiang Mai",
+  "logo": "public/images/whoopers.jpeg",
   "primaryColor": "#2563eb",
   "accentColor": "#f59e0b",
   "wifi": {
