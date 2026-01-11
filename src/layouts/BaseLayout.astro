@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { getSettings } from '../lib/content';
 import { THEME_PALETTES, type ThemeMode } from '../lib/types';
+import InstallPrompt from '../components/InstallPrompt.astro';
 
 interface Props {
   title?: string;
@@ -108,6 +109,9 @@ const themeColor = palette.bg;
     <main id="main">
       <slot />
     </main>
+
+    <!-- PWA Install Prompt -->
+    <InstallPrompt />
 
     {showNav && (
       <nav data-tour="nav" class="bottom-nav">

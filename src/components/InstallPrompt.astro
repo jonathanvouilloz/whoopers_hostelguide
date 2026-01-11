@@ -1,0 +1,165 @@
+---
+/**
+ * InstallPrompt - Modal to prompt PWA installation
+ * Shown on second visit after onboarding
+ */
+---
+
+<div id="install-prompt-overlay" class="install-overlay hidden">
+  <div class="install-modal">
+    <!-- Icon -->
+    <div class="flex justify-center mb-4">
+      <div class="size-16 rounded-2xl bg-(--color-primary)/10 flex items-center justify-center">
+        <span class="material-symbols-outlined text-(--color-primary) text-[32px]">download</span>
+      </div>
+    </div>
+
+    <!-- Title -->
+    <h2 class="text-xl font-bold text-(--color-text) text-center mb-2">
+      Add to Home Screen
+    </h2>
+
+    <!-- Subtitle -->
+    <p class="text-sm text-(--color-text-secondary) text-center mb-5">
+      Get the best experience
+    </p>
+
+    <!-- Benefits -->
+    <ul class="space-y-3 mb-6">
+      <li class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-(--color-primary) text-[20px]">touch_app</span>
+        <span class="text-sm text-(--color-text)">Quick access anytime</span>
+      </li>
+      <li class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-(--color-primary) text-[20px]">bolt</span>
+        <span class="text-sm text-(--color-text)">Faster & smoother</span>
+      </li>
+      <li class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-(--color-primary) text-[20px]">wifi_off</span>
+        <span class="text-sm text-(--color-text)">Works offline</span>
+      </li>
+    </ul>
+
+    <!-- Buttons -->
+    <div class="space-y-3">
+      <button id="install-btn" class="btn-primary w-full">
+        <span class="material-symbols-outlined text-[18px]">download</span>
+        Install App
+      </button>
+      <button id="install-dismiss-btn" class="w-full text-center text-sm text-(--color-text-secondary) hover:text-(--color-text) transition-colors py-2">
+        Maybe later
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .install-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .install-overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .install-overlay.hidden {
+    display: none;
+  }
+
+  .install-modal {
+    width: 100%;
+    max-width: 320px;
+    background-color: var(--color-surface);
+    border-radius: var(--radius-2xl);
+    border: 1px solid var(--color-border-light);
+    padding: 1.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    transform: scale(0.95) translateY(10px);
+    transition: transform 0.3s ease;
+  }
+
+  .install-overlay.show .install-modal {
+    transform: scale(1) translateY(0);
+  }
+</style>
+
+<script>
+  import {
+    initPwaInstall,
+    incrementVisitCount,
+    shouldShowInstallPrompt,
+    triggerInstall,
+    dismissInstallPrompt
+  } from '../lib/pwaInstall';
+  import { isOnboardingCompleted } from '../lib/onboarding';
+
+  // Initialize PWA install capture early
+  initPwaInstall();
+
+  // Increment visit count on page load
+  incrementVisitCount();
+
+  // Show install prompt after a delay if conditions are met
+  function checkAndShowPrompt() {
+    // Only show if onboarding is completed and install prompt is ready
+    if (!isOnboardingCompleted()) return;
+    if (!shouldShowInstallPrompt()) return;
+
+    const overlay = document.getElementById('install-prompt-overlay');
+    if (!overlay) return;
+
+    // Show with animation
+    overlay.classList.remove('hidden');
+    requestAnimationFrame(() => {
+      overlay.classList.add('show');
+    });
+  }
+
+  // Check after a short delay to allow beforeinstallprompt to fire
+  setTimeout(checkAndShowPrompt, 1000);
+
+  // Install button handler
+  document.getElementById('install-btn')?.addEventListener('click', async () => {
+    await triggerInstall();
+    const overlay = document.getElementById('install-prompt-overlay');
+
+    if (overlay) {
+      overlay.classList.remove('show');
+      setTimeout(() => overlay.classList.add('hidden'), 300);
+    }
+  });
+
+  // Dismiss button handler
+  document.getElementById('install-dismiss-btn')?.addEventListener('click', () => {
+    dismissInstallPrompt();
+    const overlay = document.getElementById('install-prompt-overlay');
+
+    if (overlay) {
+      overlay.classList.remove('show');
+      setTimeout(() => overlay.classList.add('hidden'), 300);
+    }
+  });
+
+  // Close on overlay click
+  document.getElementById('install-prompt-overlay')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) {
+      dismissInstallPrompt();
+      const overlay = e.currentTarget as HTMLElement;
+      overlay.classList.remove('show');
+      setTimeout(() => overlay.classList.add('hidden'), 300);
+    }
+  });
+</script>
