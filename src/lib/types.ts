@@ -1,4 +1,53 @@
 // ============================================
+// Theme Types
+// ============================================
+
+export type ThemeMode = 'light' | 'dark';
+
+export interface ThemePalette {
+  bg: string;
+  surface: string;
+  surfaceInput: string;
+  text: string;
+  textSecondary: string;
+  muted: string;
+  border: string;
+  borderLight: string;
+  accent: string;
+  accentDark: string;
+  accentGlow: string;
+}
+
+export const THEME_PALETTES: Record<ThemeMode, ThemePalette> = {
+  light: {
+    bg: '#F8F9FA',           // Pearl White
+    surface: '#FFFFFF',       // Pure White
+    surfaceInput: '#E5E7EB',
+    text: '#1A202C',          // Deep Slate
+    textSecondary: '#718096', // Cool Grey
+    muted: '#9CA3AF',
+    border: 'rgba(0, 0, 0, 0.05)',
+    borderLight: 'rgba(0, 0, 0, 0.1)',
+    accent: '#008080',        // Thai Teal (default, overridable by primaryColor)
+    accentDark: '#006666',
+    accentGlow: 'rgba(0, 128, 128, 0.2)',
+  },
+  dark: {
+    bg: '#0F172A',            // Midnight Ocean
+    surface: '#1E293B',       // Deep Navy
+    surfaceInput: '#334155',
+    text: '#F1F5F9',          // Cloud Grey
+    textSecondary: '#94A3B8', // Muted Blue
+    muted: '#64748B',
+    border: 'rgba(255, 255, 255, 0.05)',
+    borderLight: 'rgba(255, 255, 255, 0.1)',
+    accent: '#2DD4BF',        // Bright Aqua (default, overridable by primaryColor)
+    accentDark: '#14B8A6',
+    accentGlow: 'rgba(45, 212, 191, 0.3)',
+  },
+};
+
+// ============================================
 // Settings Types
 // ============================================
 
@@ -22,8 +71,9 @@ export interface CategoryImages {
 export interface Settings {
   hostelName: string;
   logo: string;
-  primaryColor: string;
-  accentColor: string;
+  theme?: ThemeMode;
+  primaryColor?: string;
+  accentColor?: string;
   wifi: WiFiSettings;
   checkIn: string;
   checkOut: string;

@@ -1,6 +1,7 @@
 {
   "hostelName": "Whoopers Hostel Chiang Mai",
   "logo": "/images/whoopers.jpeg",
+  "theme": "dark",
   "primaryColor": "#2563eb",
   "accentColor": "#f59e0b",
   "wifi": {

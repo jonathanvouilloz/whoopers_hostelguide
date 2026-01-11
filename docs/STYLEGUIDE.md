@@ -1,26 +1,74 @@
 # HostelGuide - Style Guide
 
-> Design system et conventions pour le projet - **Theme BLACK**
+> Design system et conventions pour le projet
 
 ---
 
-## Design System - Theme BLACK
+## Système de Theming
 
-### Palette de couleurs
+Le thème est défini via `settings.json` (champ `theme`: `"light"` ou `"dark"`).
+Les couleurs sont injectées dynamiquement dans le CSS via `BaseLayout.astro`.
+
+### Configuration dans settings.json
+
+```json
+{
+  "theme": "dark",           // "light" ou "dark"
+  "primaryColor": "#2563eb", // Optionnel: override la couleur accent
+  "accentColor": "#f59e0b"   // Optionnel: couleur secondaire
+}
+```
+
+---
+
+## Palettes de Couleurs
+
+### Light Mode
+
+| Élément | Nom | Hex | Usage |
+|---------|-----|-----|-------|
+| Fond | Pearl White | `#F8F9FA` | Surface principale |
+| Surface | Pure White | `#FFFFFF` | Cards et menus |
+| Surface Input | Light Gray | `#E5E7EB` | Inputs, chips |
+| Texte Principal | Deep Slate | `#1A202C` | Haute lisibilité |
+| Texte Secondaire | Cool Grey | `#718096` | Sous-titres, icônes |
+| Muted | Gray | `#9CA3AF` | Texte désactivé |
+| Bordure | Black 5% | `rgba(0,0,0,0.05)` | Bordures subtiles |
+| Bordure Light | Black 10% | `rgba(0,0,0,0.1)` | Bordures visibles |
+| Accent | Thai Teal | `#008080` | Couleur par défaut |
+
+### Dark Mode
+
+| Élément | Nom | Hex | Usage |
+|---------|-----|-----|-------|
+| Fond | Midnight Ocean | `#0F172A` | Bleu très foncé |
+| Surface | Deep Navy | `#1E293B` | Élévation des composants |
+| Surface Input | Slate | `#334155` | Inputs, chips |
+| Texte Principal | Cloud Grey | `#F1F5F9` | Doux pour les yeux |
+| Texte Secondaire | Muted Blue | `#94A3B8` | Infos secondaires |
+| Muted | Slate Gray | `#64748B` | Texte désactivé |
+| Bordure | White 5% | `rgba(255,255,255,0.05)` | Bordures subtiles |
+| Bordure Light | White 10% | `rgba(255,255,255,0.1)` | Bordures visibles |
+| Accent | Bright Aqua | `#2DD4BF` | Version lumineuse |
+
+### Variables CSS
+
+| Variable | Light | Dark |
+|----------|-------|------|
+| `--color-bg` | `#F8F9FA` | `#0F172A` |
+| `--color-surface` | `#FFFFFF` | `#1E293B` |
+| `--color-surface-input` | `#E5E7EB` | `#334155` |
+| `--color-text` | `#1A202C` | `#F1F5F9` |
+| `--color-text-secondary` | `#718096` | `#94A3B8` |
+| `--color-muted` | `#9CA3AF` | `#64748B` |
+| `--color-border` | `rgba(0,0,0,0.05)` | `rgba(255,255,255,0.05)` |
+| `--color-border-light` | `rgba(0,0,0,0.1)` | `rgba(255,255,255,0.1)` |
+| `--color-primary` | Thai Teal ou custom | Bright Aqua ou custom |
+
+### Couleurs Sémantiques (fixes)
 
 | Variable | Valeur | Usage |
 |----------|--------|-------|
-| `--color-primary` | `#13c8ec` | Boutons principaux, liens, accents |
-| `--color-primary-dark` | `#0ea5c6` | Hover du primary |
-| `--color-accent` | `#f59e0b` | Highlights, badges spéciaux |
-| `--color-bg` | `#101f22` | Background principal |
-| `--color-surface` | `#192f33` | Cards, modals, surfaces |
-| `--color-surface-input` | `#234248` | Inputs, chips inactifs |
-| `--color-text` | `#ffffff` | Texte principal |
-| `--color-text-secondary` | `#92c0c9` | Texte secondaire, descriptions |
-| `--color-muted` | `#6b7280` | Texte désactivé |
-| `--color-border` | `rgba(255,255,255,0.05)` | Bordures subtiles |
-| `--color-border-light` | `rgba(255,255,255,0.1)` | Bordures plus visibles |
 | `--color-success` | `#22c55e` | États de succès |
 | `--color-warning` | `#f59e0b` | Avertissements |
 | `--color-error` | `#ef4444` | Erreurs, urgence |

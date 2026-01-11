@@ -326,11 +326,11 @@ body {
 
 /* Gradient overlays */
 .gradient-overlay {
-  background: linear-gradient(to bottom, transparent 0%, rgba(16, 31, 34, 0.8) 90%, rgba(16, 31, 34, 1) 100%);
+  background: linear-gradient(to bottom, transparent 0%, color-mix(in srgb, var(--color-bg) 80%, transparent) 90%, var(--color-bg) 100%);
 }
 
 .gradient-overlay-top {
-  background: linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+  background: linear-gradient(to top, transparent 0%, color-mix(in srgb, var(--color-bg) 80%, transparent) 100%);
 }
 
 /* Selection color */
