@@ -20,6 +20,9 @@ const {
   transparent = false
 } = Astro.props;
 
+// Text color: white on transparent (overlay), theme color otherwise
+const textColorClass = transparent ? 'text-white' : 'text-(--color-text)';
+
 const headerClasses = transparent
   ? 'bg-transparent'
   : 'bg-(--color-bg)/95 backdrop-blur-md border-b border-white/10';
@@ -32,7 +35,7 @@ const headerClasses = transparent
       {showBack ? (
         <a
           href={backHref}
-          class="flex size-10 items-center justify-center rounded-full text-(--color-text) hover:bg-white/10 transition-colors touch-target"
+          class:list={['flex size-10 items-center justify-center rounded-full hover:bg-white/10 transition-colors touch-target', textColorClass]}
           aria-label="Go back"
         >
           <span class="material-symbols-outlined">arrow_back</span>
@@ -44,7 +47,7 @@ const headerClasses = transparent
 
     <!-- Center: Title -->
     {title && (
-      <h1 class="text-lg font-bold leading-tight tracking-tight flex-1 text-center text-(--color-text) truncate px-2">
+      <h1 class:list={['text-lg font-bold leading-tight tracking-tight flex-1 text-center truncate px-2', textColorClass]}>
         {title}
       </h1>
     )}
