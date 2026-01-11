@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import { getEvents } from '../../lib/content';
+import { getDirectionsUrl, getWhatsAppUrl } from '../../lib/deeplinks';
+import type { HostelEvent, EventType } from '../../lib/types';
+
+export async function getStaticPaths() {
+  const events = await getEvents();
+
+  return events.map((event) => ({
+    params: { id: event.id },
+    props: { event },
+  }));
+}
+
+interface Props {
+  event: HostelEvent;
+}
+
+const { event } = Astro.props;
+
+// Build directions URL if coordinates available
+const hasCoordinates = event.lat !== null && event.lng !== null && event.lat !== undefined && event.lng !== undefined;
+const directionsUrl = hasCoordinates ? getDirectionsUrl(event.lat!, event.lng!) : null;
+
+// Build CTA URL
+function getCtaUrl(): string | null {
+  if (!event.cta) return null;
+  if (event.cta.type === 'whatsapp') {
+    return getWhatsAppUrl(event.cta.url, event.cta.message);
+  }
+  return event.cta.url;
+}
+
+const ctaUrl = getCtaUrl();
+
+// Format date for display
+const eventDate = new Date(event.date);
+const formattedDate = eventDate.toLocaleDateString('en-US', {
+  weekday: 'long',
+  month: 'long',
+  day: 'numeric',
+});
+
+// Format time display
+function getTimeDisplay(): string {
+  if (!event.startTime) return 'All Day';
+  if (!event.endTime) return event.startTime;
+  return `${event.startTime} - ${event.endTime}`;
+}
+
+// Map event type to icon
+function getEventIcon(type: EventType): string {
+  const icons: Record<EventType, string> = {
+    food: 'restaurant',
+    bars: 'local_bar',
+    activities: 'hiking',
+  };
+  return icons[type] || 'event';
+}
+
+// Capitalize type for display
+function capitalize(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+const hasImage = !!event.image;
+---
+
+<BaseLayout title={event.title} description={event.tagline} showNav={false}>
+  <Header
+    title={event.title}
+    showBack
+    backHref="/events"
+    transparent={hasImage}
+  />
+
+  <div class="event-detail pb-24">
+    <!-- Hero Image or Compact Header -->
+    {hasImage ? (
+      <div class="relative h-64 w-full -mt-16">
+        <!-- Gradient overlay for header readability -->
+        <div class="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/70 to-transparent z-10 pointer-events-none"></div>
+        <div
+          class="absolute inset-0 bg-cover bg-center"
+          style={`background-image: linear-gradient(to bottom, transparent 0%, rgba(16, 31, 34, 0.6) 70%, rgba(16, 31, 34, 1) 100%), url("${event.image}");`}
+        ></div>
+      </div>
+    ) : (
+      <div class="h-4"></div>
+    )}
+
+    <!-- Content -->
+    <div class="px-4 pt-4 space-y-5">
+      <!-- Header -->
+      <header>
+        <!-- Event type badge -->
+        <div class="flex items-center gap-2 mb-2">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[--color-primary]/20 text-[--color-primary] text-xs font-bold uppercase tracking-wider">
+            <span class="material-symbols-outlined text-[14px]">{getEventIcon(event.type)}</span>
+            {capitalize(event.type)}
+          </span>
+          {event.price && (
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-green-500/20 text-green-300 text-xs font-bold">
+              {event.price}
+            </span>
+          )}
+        </div>
+
+        <h1 class="text-2xl font-bold text-[--color-text]">{event.title}</h1>
+        <p class="text-base text-[--color-primary] font-medium mt-1">{event.tagline}</p>
+      </header>
+
+      <!-- Divider -->
+      <div class="h-px w-full bg-white/10"></div>
+
+      <!-- Description -->
+      <p class="text-base leading-relaxed text-[--color-text-secondary]">
+        {event.description}
+      </p>
+
+      <!-- Date & Time Card -->
+      <div class="card p-4">
+        <div class="flex items-start gap-3">
+          <div class="flex size-10 items-center justify-center rounded-full bg-[--color-primary]/10 text-[--color-primary]">
+            <span class="material-symbols-outlined">calendar_today</span>
+          </div>
+          <div class="flex-1">
+            <p class="font-bold text-[--color-text]">{formattedDate}</p>
+            <p class="text-sm text-[--color-primary] font-medium mt-1">
+              {getTimeDisplay()}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Location Card -->
+      <div class="card p-4">
+        <div class="flex items-start gap-3">
+          <div class="flex size-10 items-center justify-center rounded-full bg-[--color-primary]/10 text-[--color-primary]">
+            <span class="material-symbols-outlined">location_on</span>
+          </div>
+          <div class="flex-1">
+            <p class="font-bold text-[--color-text]">Location</p>
+            <p class="text-sm text-[--color-text-secondary] mt-1">{event.location}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sticky Action Buttons -->
+    <div class="action-bar">
+      {/* Maps button if coordinates available */}
+      {directionsUrl && (
+        <a
+          href={directionsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-secondary flex-1 touch-target"
+        >
+          <span class="material-symbols-outlined text-[20px]">directions</span>
+          <span>Maps</span>
+        </a>
+      )}
+
+      {/* CTA button */}
+      {ctaUrl && event.cta && (
+        <a
+          href={ctaUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-primary flex-1 touch-target"
+        >
+          <span class="material-symbols-outlined text-[18px]">
+            {event.cta.type === 'whatsapp' ? 'chat' : 'arrow_forward'}
+          </span>
+          {event.cta.label}
+        </a>
+      )}
+
+      {/* If no CTA and no directions, show a "Back to Events" button */}
+      {!ctaUrl && !directionsUrl && (
+        <a href="/events" class="btn-primary flex-1 touch-target">
+          <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+          Back to Events
+        </a>
+      )}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .action-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem;
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+    background: linear-gradient(to top, var(--color-bg) 80%, transparent);
+    z-index: 40;
+  }
+</style>

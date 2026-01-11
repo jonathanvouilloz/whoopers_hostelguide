@@ -3,106 +3,217 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import EventCard from '../components/EventCard.astro';
 import { getUpcomingEvents } from '../lib/content';
+import type { EventType } from '../lib/types';
 
-const events = await getUpcomingEvents(14);
+const events = await getUpcomingEvents(7);
 
-// Group events by date
+// Create day filter chips (7 days max)
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 
-const tomorrow = new Date(today);
-tomorrow.setDate(tomorrow.getDate() + 1);
-
-// Create day filter chips
-const days = [];
+const days: { date: string; label: string }[] = [];
 for (let i = 0; i < 7; i++) {
   const date = new Date(today);
   date.setDate(date.getDate() + i);
-  const dayName = i === 0 ? 'Today' : i === 1 ? 'Tomorrow' : date.toLocaleDateString('en-US', { weekday: 'short' });
-  const dayNum = date.getDate();
-  days.push({ date, label: `${dayName}`, num: dayNum });
+
+  let label: string;
+  if (i === 0) {
+    label = 'Today';
+  } else if (i === 1) {
+    label = 'Tomorrow';
+  } else {
+    const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
+    const dayNum = date.getDate();
+    label = `${dayName} ${dayNum}`;
+  }
+
+  // Format date as YYYY-MM-DD for comparison
+  const dateStr = date.toISOString().split('T')[0];
+  days.push({ date: dateStr, label });
 }
 
-// Get active day filter
-const url = Astro.url;
-const activeDay = parseInt(url.searchParams.get('day') || '0');
-const activeDate = new Date(today);
-activeDate.setDate(activeDate.getDate() + activeDay);
+// Map event type to Material Symbols icon
+function getEventIcon(type: EventType): string {
+  const icons: Record<EventType, string> = {
+    food: 'restaurant',
+    bars: 'local_bar',
+    activities: 'directions_walk',
+  };
+  return icons[type] || 'event';
+}
 
-// Filter events for active day
-const dayEvents = events.filter(event => {
-  const eventDate = new Date(event.date);
-  eventDate.setHours(0, 0, 0, 0);
-  return eventDate.getTime() === activeDate.getTime();
-});
+// Format time for timeline display (12h format)
+function formatTimeDisplay(startTime: string | null): string {
+  if (!startTime) return 'All Day';
+
+  const [hours, minutes] = startTime.split(':');
+  const hour = parseInt(hours);
+  const ampm = hour >= 12 ? 'PM' : 'AM';
+  const hour12 = hour % 12 || 12;
+  return `${hour12}:${minutes} ${ampm}`;
+}
 ---
 
 <BaseLayout title="Events">
   <Header title="Daily Vibe" showBack backHref="/" rightIcon="notifications" />
 
-  <!-- Day Filter -->
-  <div class="sticky top-16 z-10 w-full overflow-x-auto no-scrollbar bg-[--color-bg] py-3 px-4">
-    <div class="flex gap-2">
+  <!-- Day Filter Chips -->
+  <div class="w-full overflow-x-auto no-scrollbar py-3 px-4">
+    <div class="flex gap-3" id="day-chips">
       {days.map((day, index) => (
-        <a
-          href={`/events?day=${index}`}
-          class:list={[
-            'flex flex-col items-center justify-center rounded-xl px-4 py-2 transition-all',
-            activeDay === index
-              ? 'bg-[--color-primary] shadow-[0_0_10px_rgba(19,200,236,0.3)]'
-              : 'bg-[--color-surface]'
-          ]}
+        <button
+          type="button"
+          class:list={['day-chip', index === 0 ? 'day-chip-active' : 'day-chip-inactive']}
+          data-day={index}
+          data-date={day.date}
         >
-          <span class:list={[
-            'text-[10px] font-bold uppercase tracking-wider',
-            activeDay === index ? 'text-[--color-bg]' : 'text-[--color-text-secondary]'
-          ]}>
-            {day.label}
-          </span>
-          <span class:list={[
-            'text-lg font-bold',
-            activeDay === index ? 'text-[--color-bg]' : 'text-[--color-text]'
-          ]}>
-            {day.num}
-          </span>
-        </a>
+          {day.label}
+        </button>
       ))}
     </div>
   </div>
 
-  <main class="flex flex-col px-4 pt-4 pb-4">
-    <!-- Hero Text -->
-    <div class="py-2 mb-4">
-      <h2 class="text-2xl font-extrabold text-[--color-text] leading-tight">
-        {activeDay === 0 ? "Today's" : activeDay === 1 ? "Tomorrow's" : activeDate.toLocaleDateString('en-US', { weekday: 'long' }) + "'s"} Schedule
-        <br />
-        <span class="text-[--color-text-secondary] font-medium text-lg">
-          {dayEvents.length} {dayEvents.length === 1 ? 'event' : 'events'} planned
-        </span>
-      </h2>
+  <main class="flex flex-col px-4 pt-4 pb-24">
+    <!-- Events Timeline -->
+    <div class="relative" id="events-container">
+      <!-- Timeline vertical line -->
+      <div class="timeline-line"></div>
+
+      <!-- Events -->
+      <div class="flex flex-col gap-8" id="events-list">
+        {events.map((event, index) => (
+          <div class="event-item relative flex gap-4" data-date={event.date}>
+            <!-- Timeline Node with Icon -->
+            <div class="flex items-start z-10">
+              <div class="timeline-icon timeline-icon-inactive" data-first={index === 0}>
+                <span class="material-symbols-outlined">
+                  {getEventIcon(event.type)}
+                </span>
+              </div>
+            </div>
+
+            <!-- Event Content -->
+            <div class="flex-1 min-w-0">
+              <!-- Time header -->
+              <div class="mb-2 pl-1">
+                <span class="timeline-time">
+                  {formatTimeDisplay(event.startTime)}
+                </span>
+              </div>
+
+              <!-- Event Card -->
+              <EventCard event={event} />
+            </div>
+          </div>
+        ))}
+
+        <!-- End of day marker -->
+        <div class="relative flex gap-4 items-center" id="end-marker">
+          <div class="flex items-start z-10">
+            <div class="timeline-icon timeline-icon-inactive">
+              <span class="material-symbols-outlined">more_horiz</span>
+            </div>
+          </div>
+          <p class="text-sm pl-1" style="color: var(--color-text-secondary);">That's all for today!</p>
+        </div>
+      </div>
     </div>
 
-    <!-- Events Timeline -->
-    {dayEvents.length > 0 ? (
-      <div class="relative">
-        <!-- Timeline line -->
-        <div class="absolute left-[22px] top-8 bottom-8 w-[2px] bg-[--color-border-light]"></div>
-
-        <!-- Events -->
-        <div class="flex flex-col gap-6">
-          {dayEvents.map((event, index) => (
-            <EventCard event={event} showTimelineNode={true} isFirst={index === 0} />
-          ))}
-        </div>
+    <!-- Empty state -->
+    <div class="card p-8 text-center mt-4 hidden" id="empty-state">
+      <div class="empty-icon-wrapper">
+        <span class="material-symbols-outlined" style="font-size: 32px; color: var(--color-text-secondary);">event_busy</span>
       </div>
-    ) : (
-      <div class="card p-8 text-center mt-4">
-        <div class="flex size-16 items-center justify-center rounded-full bg-[--color-surface-input] mx-auto mb-4">
-          <span class="material-symbols-outlined text-[32px] text-[--color-text-secondary]">event_busy</span>
-        </div>
-        <p class="font-bold text-[--color-text]">No events planned</p>
-        <p class="text-sm text-[--color-text-secondary] mt-1">Check back soon for activities!</p>
-      </div>
-    )}
+      <p class="font-bold" style="color: var(--color-text);">No events planned</p>
+      <p class="text-sm mt-1" style="color: var(--color-text-secondary);">Check back soon for activities!</p>
+    </div>
   </main>
 </BaseLayout>
+
+<style>
+  .empty-icon-wrapper {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background-color: var(--color-surface-input);
+    margin: 0 auto 1rem;
+  }
+  .hidden {
+    display: none !important;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const chips = document.querySelectorAll('#day-chips .day-chip');
+    const eventItems = document.querySelectorAll('.event-item');
+    const emptyState = document.getElementById('empty-state');
+    const eventsContainer = document.getElementById('events-container');
+    const endMarker = document.getElementById('end-marker');
+
+    // Get initial day from URL or default to 0
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialDay = parseInt(urlParams.get('day') || '0');
+
+    function filterEvents(dayIndex: number) {
+      const selectedChip = chips[dayIndex] as HTMLElement;
+      const selectedDate = selectedChip?.dataset.date;
+
+      // Update chip styles
+      chips.forEach((chip, index) => {
+        chip.classList.remove('day-chip-active', 'day-chip-inactive');
+        chip.classList.add(index === dayIndex ? 'day-chip-active' : 'day-chip-inactive');
+      });
+
+      // Filter events
+      let visibleCount = 0;
+      let firstVisible = true;
+
+      eventItems.forEach((item) => {
+        const el = item as HTMLElement;
+        const eventDate = el.dataset.date;
+        const isVisible = eventDate === selectedDate;
+
+        el.style.display = isVisible ? 'flex' : 'none';
+
+        if (isVisible) {
+          visibleCount++;
+          // Update first icon style
+          const icon = el.querySelector('.timeline-icon');
+          if (icon) {
+            icon.classList.remove('timeline-icon-active', 'timeline-icon-inactive');
+            icon.classList.add(firstVisible ? 'timeline-icon-active' : 'timeline-icon-inactive');
+          }
+          firstVisible = false;
+        }
+      });
+
+      // Toggle empty state
+      if (emptyState && eventsContainer && endMarker) {
+        if (visibleCount === 0) {
+          eventsContainer.classList.add('hidden');
+          emptyState.classList.remove('hidden');
+        } else {
+          eventsContainer.classList.remove('hidden');
+          emptyState.classList.add('hidden');
+        }
+      }
+
+      // Update URL without reload
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.set('day', dayIndex.toString());
+      window.history.replaceState({}, '', newUrl.toString());
+    }
+
+    // Add click handlers
+    chips.forEach((chip, index) => {
+      chip.addEventListener('click', () => filterEvents(index));
+    });
+
+    // Initialize with URL param or day 0
+    filterEvents(initialDay);
+  });
+</script>

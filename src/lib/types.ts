@@ -111,6 +111,8 @@ export type SpotCategory = 'restaurants' | 'laundry' | 'transport' | 'bars' | 'a
 // Event Types
 // ============================================
 
+export type EventType = 'food' | 'bars' | 'activities';
+
 export type CTAType = 'whatsapp' | 'link';
 
 export interface EventCTA {
@@ -123,11 +125,16 @@ export interface EventCTA {
 export interface HostelEvent {
   id: string;
   title: string;
+  tagline: string;
   description: string;
+  type: EventType;
   date: string;
-  startTime: string;
-  endTime: string;
+  startTime: string | null;
+  endTime: string | null;
   location: string;
+  lat?: number | null;
+  lng?: number | null;
+  image?: string | null;
   price: string | null;
   cta: EventCTA | null;
 }

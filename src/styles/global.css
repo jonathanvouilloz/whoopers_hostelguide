@@ -350,3 +350,77 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* ============================================
+   Events Timeline
+   ============================================ */
+
+.timeline-line {
+  position: absolute;
+  left: 19px;
+  top: 20px;
+  bottom: 20px;
+  width: 2px;
+  background-color: var(--color-primary);
+}
+
+.timeline-icon {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.timeline-icon .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.timeline-icon-active {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.timeline-icon-inactive {
+  background-color: var(--color-surface);
+  border-color: rgba(19, 200, 236, 0.3);
+  color: var(--color-text-secondary);
+}
+
+.timeline-time {
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--color-primary);
+}
+
+/* Day filter chips */
+.day-chip {
+  flex-shrink: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.day-chip-active {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.day-chip-inactive {
+  background-color: transparent;
+  border: 1px solid var(--color-border-light);
+  color: var(--color-text-secondary);
+}
+
+.day-chip-inactive:hover {
+  border-color: var(--color-primary);
+  color: var(--color-text);
+}

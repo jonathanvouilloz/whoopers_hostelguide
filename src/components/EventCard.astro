@@ -1,90 +1,66 @@
 ---
 /**
- * EventCard - Event listing with timeline design
- * Redesigned for BLACK theme
+ * EventCard - Simplified card for timeline display
+ * Shows title, tagline, price, location and Details link
  */
 import type { HostelEvent } from '../lib/types';
-import { getWhatsAppUrl } from '../lib/deeplinks';
-import Badge from './ui/Badge.astro';
 
 interface Props {
   event: HostelEvent;
-  showTimelineNode?: boolean;
-  isFirst?: boolean;
 }
 
-const { event, showTimelineNode = false, isFirst = false } = Astro.props;
-
-// Build CTA URL
-function getCtaUrl(): string | null {
-  if (!event.cta) return null;
-
-  if (event.cta.type === 'whatsapp') {
-    return getWhatsAppUrl(event.cta.url, event.cta.message);
-  }
-  return event.cta.url;
-}
-
-const ctaUrl = getCtaUrl();
+const { event } = Astro.props;
 ---
 
-<article class="event-card relative flex gap-4">
-  <!-- Timeline Node -->
-  {showTimelineNode && (
-    <div class="flex flex-col items-center pt-1">
-      <div class:list={[
-        'flex size-11 shrink-0 items-center justify-center rounded-full border-2',
-        isFirst
-          ? 'bg-[--color-primary] border-[--color-primary] text-[--color-bg]'
-          : 'bg-[--color-surface] border-[--color-border-light] text-[--color-primary]'
-      ]}>
-        <span class="material-symbols-outlined text-[20px]">celebration</span>
-      </div>
-    </div>
-  )}
-
-  <!-- Event Content -->
-  <div class="flex-1 card overflow-hidden">
-    <!-- Time Badge -->
-    <div class="flex items-center justify-between p-3 border-b border-[--color-border]">
-      <div class="flex items-center gap-2">
-        <span class="material-symbols-outlined text-[--color-primary] text-[18px]">schedule</span>
-        <span class="text-sm font-bold text-[--color-text]">
-          {event.startTime} - {event.endTime}
-        </span>
-      </div>
-      {event.price && (
-        <Badge variant="success">{event.price}</Badge>
-      )}
+<article class="event-card card overflow-hidden">
+  <div class="p-3">
+    <!-- Title and tagline -->
+    <div class="mb-3">
+      <h3 class="text-base font-bold text-[--color-text] leading-tight">{event.title}</h3>
+      <p class="text-sm text-[--color-text-secondary] mt-1">{event.tagline}</p>
     </div>
 
-    <!-- Event Details -->
-    <div class="p-4 space-y-3">
-      <div>
-        <h3 class="text-lg font-bold text-[--color-text] leading-tight">{event.title}</h3>
-        <p class="text-sm text-[--color-text-secondary] mt-1 line-clamp-2">{event.description}</p>
+    <!-- Price -->
+    {event.price && (
+      <div class="text-sm mb-3">
+        <span class="text-[--color-primary] font-bold">{event.price}</span>
       </div>
+    )}
 
-      <!-- Location -->
-      <div class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
-        <span class="material-symbols-outlined text-[16px]">location_on</span>
+    <!-- Bottom row: Location left, Details right -->
+    <div class="flex items-center justify-between pt-2 border-t border-white/5">
+      <div class="flex items-center gap-1 text-xs text-[--color-text-secondary]">
+        <span class="material-symbols-outlined" style="font-size: 12px;">location_on</span>
         <span>{event.location}</span>
       </div>
-
-      <!-- CTA Button -->
-      {ctaUrl && event.cta && (
-        <a
-          href={ctaUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[--color-primary] text-[--color-bg] font-bold text-sm mt-2 hover:bg-[--color-primary-dark] transition-colors touch-target"
-        >
-          <span class="material-symbols-outlined text-[18px]">
-            {event.cta.type === 'whatsapp' ? 'chat' : 'arrow_forward'}
-          </span>
-          {event.cta.label}
-        </a>
-      )}
+      <a
+        href={`/event/${event.id}`}
+        class="event-details-link"
+      >
+        <span>Details</span>
+        <span class="material-symbols-outlined" style="font-size: 12px;">arrow_forward</span>
+      </a>
     </div>
   </div>
 </article>
+
+<style>
+  .event-card {
+    transition: transform 0.2s ease;
+  }
+  .event-card:active {
+    transform: scale(0.98);
+  }
+  .event-details-link {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    transition: opacity 0.2s;
+  }
+  .event-details-link:hover {
+    opacity: 0.8;
+  }
+</style>

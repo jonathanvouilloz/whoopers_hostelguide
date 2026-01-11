@@ -101,17 +101,39 @@ export async function getEvents(): Promise<HostelEvent[]> {
   return eventsFile.events;
 }
 
+export async function getEventById(id: string): Promise<HostelEvent | undefined> {
+  const events = await getEvents();
+  return events.find((event) => event.id === id);
+}
+
 export async function getUpcomingEvents(days: number = 7): Promise<HostelEvent[]> {
   const events = await getEvents();
   const now = new Date();
+  now.setHours(0, 0, 0, 0);
   const futureDate = new Date(now.getTime() + days * 24 * 60 * 60 * 1000);
 
   return events
     .filter((event) => {
       const eventDate = new Date(event.date);
+      eventDate.setHours(0, 0, 0, 0);
       return eventDate >= now && eventDate <= futureDate;
     })
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    .sort((a, b) => {
+      // First sort by date
+      const dateA = new Date(a.date).getTime();
+      const dateB = new Date(b.date).getTime();
+      if (dateA !== dateB) return dateA - dateB;
+
+      // All Day events first (null startTime)
+      if (a.startTime === null && b.startTime !== null) return -1;
+      if (a.startTime !== null && b.startTime === null) return 1;
+
+      // Then sort by startTime
+      if (a.startTime && b.startTime) {
+        return a.startTime.localeCompare(b.startTime);
+      }
+      return 0;
+    });
 }
 
 // ============================================
