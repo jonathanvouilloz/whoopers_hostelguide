@@ -1,25 +1,17 @@
 {
-  "events": [
+  "activities": [
     {
-      "id": "island-trip",
-      "title": "Day Trip to Koh Samet",
-      "tagline": "Beach paradise just 3 hours away",
-      "description": "Escape to the beautiful Koh Samet island for a full day of sun, sand, and crystal-clear water. Price includes round-trip transport, ferry tickets, and lunch. Bring sunscreen and your swimsuit!",
+      "id": "yoga-morning",
+      "title": "Morning Yoga Session",
+      "tagline": "Start your day with mindful stretching",
+      "description": "Wake up with a gentle 45-minute yoga session on our rooftop terrace. Suitable for all levels. Mats provided. Come in comfortable clothes and bring water.",
       "type": "activities",
-      "date": "2026-01-11",
-      "startTime": null,
-      "endTime": null,
-      "location": "Departure from Hostel",
-      "lat": 12.5684,
-      "lng": 101.4556,
+      "location": "Rooftop Terrace",
+      "lat": null,
+      "lng": null,
       "image": null,
-      "price": "1,200 THB",
-      "cta": {
-        "type": "whatsapp",
-        "label": "Book now",
-        "url": "+66812345678",
-        "message": "Hi! I want to join the Koh Samet trip"
-      }
+      "price": "Free",
+      "cta": null
     },
     {
       "id": "cooking-class",
@@ -27,9 +19,6 @@
       "tagline": "Learn 3 authentic dishes with our chef",
       "description": "Join our experienced Thai chef for a hands-on cooking experience. You'll learn to prepare Pad Thai, Green Curry, and Mango Sticky Rice. All ingredients and equipment provided. Vegetarian options available.",
       "type": "food",
-      "date": "2026-01-11",
-      "startTime": "14:00",
-      "endTime": "17:00",
       "location": "Hostel Kitchen",
       "lat": null,
       "lng": null,
@@ -43,14 +32,11 @@
       }
     },
     {
-      "id": "bar-crawl-friday",
-      "title": "Friday Bar Crawl",
+      "id": "bar-crawl",
+      "title": "Bar Crawl",
       "tagline": "Explore the best local bars with us",
       "description": "Join fellow travelers for a guided tour of the neighborhood's hidden gem bars. We'll visit 4 unique spots, each with a free welcome drink included. Make new friends and discover places you'd never find on your own!",
       "type": "bars",
-      "date": "2026-01-11",
-      "startTime": "20:00",
-      "endTime": null,
       "location": "Meet at Reception",
       "lat": null,
       "lng": null,
@@ -60,24 +46,8 @@
         "type": "whatsapp",
         "label": "Join the crawl",
         "url": "+66812345678",
-        "message": "Hi! I want to join Friday's bar crawl"
+        "message": "Hi! I want to join the bar crawl"
       }
-    },
-    {
-      "id": "yoga-morning",
-      "title": "Morning Yoga Session",
-      "tagline": "Start your day with mindful stretching",
-      "description": "Wake up with a gentle 45-minute yoga session on our rooftop terrace. Suitable for all levels. Mats provided. Come in comfortable clothes and bring water.",
-      "type": "activities",
-      "date": "2026-01-12",
-      "startTime": "07:30",
-      "endTime": "08:15",
-      "location": "Rooftop Terrace",
-      "lat": null,
-      "lng": null,
-      "image": null,
-      "price": "Free",
-      "cta": null
     },
     {
       "id": "pasta-night",
@@ -85,9 +55,6 @@
       "tagline": "Free dinner for everyone! BYOB",
       "description": "Our weekly community dinner! Fresh homemade pasta served in the common room. Vegetarian and gluten-free options available. Bring your own drinks and good vibes.",
       "type": "food",
-      "date": "2026-01-12",
-      "startTime": "19:00",
-      "endTime": "21:00",
       "location": "Common Room",
       "lat": null,
       "lng": null,

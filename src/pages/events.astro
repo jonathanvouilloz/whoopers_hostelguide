@@ -2,10 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import EventCard from '../components/EventCard.astro';
-import { getUpcomingEvents } from '../lib/content';
-import type { EventType } from '../lib/types';
+import { getUpcomingScheduledEvents } from '../lib/content';
+import type { ActivityType } from '../lib/types';
 
-const events = await getUpcomingEvents(7);
+const events = await getUpcomingScheduledEvents(7);
 
 // Create day filter chips (7 days max)
 const today = new Date();
@@ -33,8 +33,8 @@ for (let i = 0; i < 7; i++) {
 }
 
 // Map event type to Material Symbols icon
-function getEventIcon(type: EventType): string {
-  const icons: Record<EventType, string> = {
+function getEventIcon(type: ActivityType): string {
+  const icons: Record<ActivityType, string> = {
     food: 'restaurant',
     bars: 'local_bar',
     activities: 'directions_walk',

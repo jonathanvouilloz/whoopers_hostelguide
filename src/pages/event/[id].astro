@@ -1,24 +1,33 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
-import { getEvents } from '../../lib/content';
+import { getAllScheduledEventIds, getScheduledEventById } from '../../lib/content';
 import { getDirectionsUrl, getWhatsAppUrl } from '../../lib/deeplinks';
-import type { HostelEvent, EventType } from '../../lib/types';
+import type { ScheduledEvent, ActivityType } from '../../lib/types';
 
 export async function getStaticPaths() {
-  const events = await getEvents();
+  const eventIds = await getAllScheduledEventIds();
 
-  return events.map((event) => ({
-    params: { id: event.id },
-    props: { event },
-  }));
+  const paths = await Promise.all(
+    eventIds.map(async (id) => {
+      const result = await getScheduledEventById(id);
+      if (!result) return null;
+      return {
+        params: { id },
+        props: { event: result.event, isRecurring: result.isRecurring },
+      };
+    })
+  );
+
+  return paths.filter((p): p is NonNullable<typeof p> => p !== null);
 }
 
 interface Props {
-  event: HostelEvent;
+  event: ScheduledEvent;
+  isRecurring: boolean;
 }
 
-const { event } = Astro.props;
+const { event, isRecurring } = Astro.props;
 
 // Build directions URL if coordinates available
 const hasCoordinates = event.lat !== null && event.lng !== null && event.lat !== undefined && event.lng !== undefined;
@@ -51,8 +60,8 @@ function getTimeDisplay(): string {
 }
 
 // Map event type to icon
-function getEventIcon(type: EventType): string {
-  const icons: Record<EventType, string> = {
+function getEventIcon(type: ActivityType): string {
+  const icons: Record<ActivityType, string> = {
     food: 'restaurant',
     bars: 'local_bar',
     activities: 'hiking',
@@ -96,11 +105,17 @@ const hasImage = !!event.image;
       <!-- Header -->
       <header>
         <!-- Event type badge -->
-        <div class="flex items-center gap-2 mb-2">
+        <div class="flex items-center gap-2 mb-2 flex-wrap">
           <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-(--color-primary)/20 text-(--color-primary) text-xs font-bold uppercase tracking-wider">
             <span class="material-symbols-outlined text-[14px]">{getEventIcon(event.type)}</span>
             {capitalize(event.type)}
           </span>
+          {isRecurring && (
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-bold">
+              <span class="material-symbols-outlined text-[14px]">repeat</span>
+              Weekly
+            </span>
+          )}
           {event.price && (
             <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-green-500/20 text-green-300 text-xs font-bold">
               {event.price}

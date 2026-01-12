@@ -1,0 +1,25 @@
+{
+  "events": [
+    {
+      "id": "island-trip-jan15",
+      "title": "Day Trip to Koh Samet",
+      "tagline": "Beach paradise just 3 hours away",
+      "description": "Escape to the beautiful Koh Samet island for a full day of sun, sand, and crystal-clear water. Price includes round-trip transport, ferry tickets, and lunch. Bring sunscreen and your swimsuit!",
+      "type": "activities",
+      "date": "2026-01-15",
+      "startTime": null,
+      "endTime": null,
+      "location": "Departure from Hostel",
+      "lat": 12.5684,
+      "lng": 101.4556,
+      "image": null,
+      "price": "1,200 THB",
+      "cta": {
+        "type": "whatsapp",
+        "label": "Book now",
+        "url": "+66812345678",
+        "message": "Hi! I want to join the Koh Samet trip on Jan 15"
+      }
+    }
+  ]
+}

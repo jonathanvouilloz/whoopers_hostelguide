@@ -170,27 +170,62 @@ export interface SpotsFile {
 export type SpotCategory = 'restaurants' | 'laundry' | 'transport' | 'bars' | 'activities';
 
 // ============================================
-// Event Types
+// Event/Activity Types
 // ============================================
 
-export type EventType = 'food' | 'bars' | 'activities';
+export type ActivityType = 'food' | 'bars' | 'activities';
 
 export type CTAType = 'whatsapp' | 'link';
 
-export interface EventCTA {
+export interface ActivityCTA {
   type: CTAType;
   label: string;
   url: string;
   message?: string;
 }
 
-export interface HostelEvent {
+// Activity: Reusable definition without date/time (library)
+export interface Activity {
   id: string;
   title: string;
   tagline: string;
   description: string;
-  type: EventType;
-  date: string;
+  type: ActivityType;
+  location: string;
+  lat?: number | null;
+  lng?: number | null;
+  image?: string | null;
+  price: string | null;
+  cta: ActivityCTA | null;
+}
+
+export interface ActivitiesFile {
+  activities: Activity[];
+}
+
+// Schedule: Weekly recurring slots with times
+export type ScheduleDay = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
+
+export interface ScheduleSlot {
+  activityId: string;
+  startTime: string | null; // "07:30" or null for All Day
+  endTime: string | null;   // "08:15" or null
+}
+
+export type WeeklySchedule = Record<ScheduleDay, ScheduleSlot[]>;
+
+export interface ScheduleFile {
+  schedule: WeeklySchedule;
+}
+
+// Special Event: One-off event with specific date
+export interface SpecialEvent {
+  id: string;
+  title: string;
+  tagline: string;
+  description: string;
+  type: ActivityType;
+  date: string; // YYYY-MM-DD
   startTime: string | null;
   endTime: string | null;
   location: string;
@@ -198,12 +233,36 @@ export interface HostelEvent {
   lng?: number | null;
   image?: string | null;
   price: string | null;
-  cta: EventCTA | null;
+  cta: ActivityCTA | null;
 }
 
-export interface EventsFile {
-  events: HostelEvent[];
+export interface SpecialEventsFile {
+  events: SpecialEvent[];
 }
+
+// ScheduledEvent: Unified type for display (combines Activity + Schedule or SpecialEvent)
+export interface ScheduledEvent {
+  id: string;              // Unique: "activityId-YYYY-MM-DD" for recurring, or event.id for special
+  title: string;
+  tagline: string;
+  description: string;
+  type: ActivityType;
+  date: string;            // Computed date YYYY-MM-DD
+  startTime: string | null;
+  endTime: string | null;
+  location: string;
+  lat?: number | null;
+  lng?: number | null;
+  image?: string | null;
+  price: string | null;
+  cta: ActivityCTA | null;
+  isRecurring: boolean;    // true = from schedule, false = special event
+  sourceId: string;        // Original activity/event ID for linking
+}
+
+// Legacy type aliases for backward compatibility
+export type EventType = ActivityType;
+export type EventCTA = ActivityCTA;
 
 // ============================================
 // Category Metadata

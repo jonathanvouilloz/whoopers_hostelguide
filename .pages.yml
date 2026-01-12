@@ -406,16 +406,26 @@ content:
             label: Phone
             type: string
 
-  - name: events
-    label: "📅 Events"
-    path: content/events.json
+  # ============================================
+  # Events System (Activities + Schedule + Special Events)
+  # ============================================
+
+  - name: hostel-activities
+    label: "🔄 Activities Library"
+    path: content/activities.json
     type: file
+    description: "Reusable activities for weekly schedule. Create once, use every week!"
     fields:
-      - name: events
-        label: Events
+      - name: activities
+        label: Activities
         type: object
         list: true
         fields:
+          - name: id
+            label: ID
+            type: string
+            description: "Unique identifier (e.g. yoga-morning, cooking-class)"
+            required: true
           - name: title
             label: Title
             type: string
@@ -424,6 +434,202 @@ content:
             label: Tagline
             type: string
             description: "Short catchy description shown on cards"
+          - name: description
+            label: Description
+            type: text
+          - name: type
+            label: Activity Type
+            type: select
+            required: true
+            options:
+              values:
+                - food
+                - bars
+                - activities
+          - name: location
+            label: Location
+            type: string
+            required: true
+          - name: lat
+            label: Latitude
+            type: number
+            description: "GPS latitude for Maps button"
+          - name: lng
+            label: Longitude
+            type: number
+            description: "GPS longitude for Maps button"
+          - name: image
+            label: Cover Image
+            type: image
+            options:
+              path: public/images/events
+          - name: price
+            label: Price
+            type: string
+            description: "e.g. Free, 500 THB"
+          - name: cta
+            label: Call to Action
+            type: object
+            fields:
+              - name: type
+                label: Type
+                type: select
+                options:
+                  values:
+                    - whatsapp
+                    - link
+              - name: label
+                label: Button Label
+                type: string
+              - name: url
+                label: URL / WhatsApp Number
+                type: string
+              - name: message
+                label: WhatsApp Message
+                type: string
+
+  - name: weekly-schedule
+    label: "📅 Weekly Schedule"
+    path: content/schedule.json
+    type: file
+    description: "Which activities happen on which days. Times are set here!"
+    fields:
+      - name: schedule
+        label: Schedule
+        type: object
+        fields:
+          - name: monday
+            label: Monday
+            type: object
+            list: true
+            fields:
+              - name: activityId
+                label: Activity ID
+                type: string
+                description: "ID from Activities Library (e.g. yoga-morning)"
+                required: true
+              - name: startTime
+                label: Start Time
+                type: string
+                description: "HH:MM format (e.g. 07:30). Leave empty for All Day."
+              - name: endTime
+                label: End Time
+                type: string
+                description: "HH:MM format (e.g. 08:15)"
+          - name: tuesday
+            label: Tuesday
+            type: object
+            list: true
+            fields:
+              - name: activityId
+                label: Activity ID
+                type: string
+                required: true
+              - name: startTime
+                label: Start Time
+                type: string
+              - name: endTime
+                label: End Time
+                type: string
+          - name: wednesday
+            label: Wednesday
+            type: object
+            list: true
+            fields:
+              - name: activityId
+                label: Activity ID
+                type: string
+                required: true
+              - name: startTime
+                label: Start Time
+                type: string
+              - name: endTime
+                label: End Time
+                type: string
+          - name: thursday
+            label: Thursday
+            type: object
+            list: true
+            fields:
+              - name: activityId
+                label: Activity ID
+                type: string
+                required: true
+              - name: startTime
+                label: Start Time
+                type: string
+              - name: endTime
+                label: End Time
+                type: string
+          - name: friday
+            label: Friday
+            type: object
+            list: true
+            fields:
+              - name: activityId
+                label: Activity ID
+                type: string
+                required: true
+              - name: startTime
+                label: Start Time
+                type: string
+              - name: endTime
+                label: End Time
+                type: string
+          - name: saturday
+            label: Saturday
+            type: object
+            list: true
+            fields:
+              - name: activityId
+                label: Activity ID
+                type: string
+                required: true
+              - name: startTime
+                label: Start Time
+                type: string
+              - name: endTime
+                label: End Time
+                type: string
+          - name: sunday
+            label: Sunday
+            type: object
+            list: true
+            fields:
+              - name: activityId
+                label: Activity ID
+                type: string
+                required: true
+              - name: startTime
+                label: Start Time
+                type: string
+              - name: endTime
+                label: End Time
+                type: string
+
+  - name: special-events
+    label: "⭐ Special Events"
+    path: content/special-events.json
+    type: file
+    description: "One-off events with specific dates (trips, concerts, etc.)"
+    fields:
+      - name: events
+        label: Events
+        type: object
+        list: true
+        fields:
+          - name: id
+            label: ID
+            type: string
+            description: "Unique identifier"
+            required: true
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: tagline
+            label: Tagline
+            type: string
           - name: description
             label: Description
             type: text
@@ -443,11 +649,10 @@ content:
           - name: startTime
             label: Start Time
             type: string
-            description: "Format: HH:MM (leave empty for All Day events)"
+            description: "HH:MM format. Leave empty for All Day."
           - name: endTime
             label: End Time
             type: string
-            description: "Format: HH:MM"
           - name: location
             label: Location
             type: string
@@ -455,25 +660,20 @@ content:
           - name: lat
             label: Latitude
             type: number
-            description: "GPS latitude for Maps button"
           - name: lng
             label: Longitude
             type: number
-            description: "GPS longitude for Maps button"
           - name: image
             label: Cover Image
             type: image
             options:
               path: public/images/events
-            description: "Hero image for event detail page"
           - name: price
             label: Price
             type: string
-            description: "e.g. Free, 500 THB, 1,200 THB"
           - name: cta
             label: Call to Action
             type: object
-            description: "Button shown on event detail page"
             fields:
               - name: type
                 label: Type
@@ -485,15 +685,12 @@ content:
               - name: label
                 label: Button Label
                 type: string
-                description: "e.g. Book Now, Join Us"
               - name: url
                 label: URL / WhatsApp Number
                 type: string
-                description: "WhatsApp: +66812345678, Link: https://..."
               - name: message
                 label: WhatsApp Message
                 type: string
-                description: "Pre-filled message for WhatsApp"
 
 media:
   input: public/images
