@@ -5,9 +5,14 @@ import AccordionItem from '../components/AccordionItem.astro';
 import EmergencyContacts from '../components/EmergencyContacts.astro';
 import { getSettings } from '../lib/content';
 
-// Import markdown files as Astro components
-import { Content as HouseRules } from '../../content/house-rules.md';
-import { Content as HowToGetHere } from '../../content/how-to-get-here.md';
+// Import markdown frontmatter - PagesCMS stores content in frontmatter field
+import { frontmatter as houseRulesFm } from '../../content/house-rules.md';
+import { frontmatter as howToGetHereFm } from '../../content/how-to-get-here.md';
+import { marked } from 'marked';
+
+// Parse markdown content to HTML
+const houseRulesHtml = marked.parse((houseRulesFm as { content?: string }).content || '');
+const howToGetHereHtml = marked.parse((howToGetHereFm as { content?: string }).content || '');
 
 const settings = await getSettings();
 
@@ -72,17 +77,13 @@ const heroImage = '/images/hero-hostel.jpg';
         <!-- House Rules -->
         <div data-tour="house-rules">
           <AccordionItem icon="gavel" title="House Rules">
-            <div class="prose-dark space-y-3 text-sm text-(--color-text-secondary)">
-              <HouseRules />
-            </div>
+            <div class="prose-dark space-y-3 text-sm text-(--color-text-secondary)" set:html={houseRulesHtml} />
           </AccordionItem>
         </div>
 
         <!-- How to Get Here -->
         <AccordionItem icon="directions" title="How to Get Here">
-          <div class="prose-dark space-y-3 text-sm text-(--color-text-secondary)">
-            <HowToGetHere />
-          </div>
+          <div class="prose-dark space-y-3 text-sm text-(--color-text-secondary)" set:html={howToGetHereHtml} />
         </AccordionItem>
 
         <!-- Check In/Out -->
