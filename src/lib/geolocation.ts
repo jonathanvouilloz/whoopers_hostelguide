@@ -11,6 +11,8 @@ export interface Coordinates {
 const PLACEHOLDER_TEXT = 'Activer localisation';
 const LOADING_TEXT = 'Localisation...';
 
+let clickHandlersAdded = false;
+
 /**
  * Calculate distance between two points using Haversine formula
  * @returns Distance in meters
@@ -184,11 +186,15 @@ export async function requestLocationPermission(): Promise<void> {
  * Add click handlers to all location trigger elements
  */
 function addClickHandlers(): void {
+  if (clickHandlersAdded) return;
+  clickHandlersAdded = true;
+
   document.addEventListener('click', (e) => {
     const target = e.target as HTMLElement;
     const trigger = target.closest('.location-trigger');
     if (trigger) {
       e.preventDefault();
+      e.stopPropagation();
       requestLocationPermission();
     }
   });
@@ -215,6 +221,9 @@ async function checkPermissionState(): Promise<'granted' | 'prompt' | 'denied' |
  * Auto-fetches distances if permission already granted
  */
 export async function initDistanceDisplay(): Promise<void> {
+  // Add click handlers FIRST (before any async operation)
+  addClickHandlers();
+
   const permissionState = await checkPermissionState();
 
   if (permissionState === 'granted') {
@@ -229,7 +238,4 @@ export async function initDistanceDisplay(): Promise<void> {
     // Show clickable placeholder
     setAllDistanceText(PLACEHOLDER_TEXT, true);
   }
-
-  // Add click handlers (only once)
-  addClickHandlers();
 }
