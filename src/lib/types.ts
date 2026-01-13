@@ -98,6 +98,8 @@ export interface Settings {
   whatsappGroupLink?: string;
   webhookUrl?: string;
   googleReviewUrl?: string;
+  hostelworldReviewUrl?: string;
+  bookingReviewUrl?: string;
 }
 
 // ============================================

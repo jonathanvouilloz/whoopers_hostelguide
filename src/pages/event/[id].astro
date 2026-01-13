@@ -104,20 +104,20 @@ const hasImage = !!event.image;
     <div class="px-4 pt-4 space-y-5">
       <!-- Header -->
       <header>
-        <!-- Event type badge -->
-        <div class="flex items-center gap-2 mb-2 flex-wrap">
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-(--color-primary)/20 text-(--color-primary) text-xs font-bold uppercase tracking-wider">
-            <span class="material-symbols-outlined text-[14px]">{getEventIcon(event.type)}</span>
+        <!-- Event type badges -->
+        <div class="flex items-center gap-2 mb-3 flex-wrap">
+          <span class="event-badge event-badge--primary">
+            <span class="material-symbols-outlined">{getEventIcon(event.type)}</span>
             {capitalize(event.type)}
           </span>
           {isRecurring && (
-            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-bold">
-              <span class="material-symbols-outlined text-[14px]">repeat</span>
+            <span class="event-badge event-badge--blue">
+              <span class="material-symbols-outlined">repeat</span>
               Weekly
             </span>
           )}
           {event.price && (
-            <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-green-500/20 text-green-300 text-xs font-bold">
+            <span class="event-badge event-badge--green">
               {event.price}
             </span>
           )}
@@ -217,5 +217,38 @@ const hasImage = !!event.image;
     padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
     background: linear-gradient(to top, var(--color-bg) 80%, transparent);
     z-index: 40;
+  }
+
+  /* Unified badge styles */
+  .event-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1;
+    height: 1.5rem; /* Fixed height for all badges */
+  }
+
+  .event-badge .material-symbols-outlined {
+    font-size: 12px !important;
+    line-height: 1;
+  }
+
+  .event-badge--primary {
+    background-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
+    color: var(--color-primary);
+  }
+
+  .event-badge--blue {
+    background-color: color-mix(in srgb, #3B82F6 20%, transparent);
+    color: #93C5FD;
+  }
+
+  .event-badge--green {
+    background-color: color-mix(in srgb, #22C55E 20%, transparent);
+    color: #86EFAC;
   }
 </style>

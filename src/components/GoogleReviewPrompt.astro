@@ -2,10 +2,33 @@
 import { getSettings } from '../lib/content';
 
 const settings = await getSettings();
-const hasReviewUrl = Boolean(settings.googleReviewUrl);
+
+// Build list of review platforms
+const reviewPlatforms = [
+  {
+    name: 'Google',
+    url: settings.googleReviewUrl,
+    icon: 'star',
+    color: '#FBBF24', // Yellow/gold
+  },
+  {
+    name: 'Hostelworld',
+    url: settings.hostelworldReviewUrl,
+    icon: 'bed',
+    color: '#F97316', // Orange
+  },
+  {
+    name: 'Booking.com',
+    url: settings.bookingReviewUrl,
+    icon: 'hotel',
+    color: '#003580', // Booking blue
+  },
+].filter(p => Boolean(p.url));
+
+const hasAnyReviewUrl = reviewPlatforms.length > 0;
 ---
 
-{hasReviewUrl && (
+{hasAnyReviewUrl && (
   <div id="review-prompt-overlay" class="review-overlay hidden">
     <div class="review-modal">
       <div class="review-content">
@@ -20,16 +43,19 @@ const hasReviewUrl = Boolean(settings.googleReviewUrl);
         </p>
 
         <div class="review-actions">
-          <a
-            href={settings.googleReviewUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            id="review-btn"
-            class="review-btn-primary"
-          >
-            <span class="material-symbols-outlined">rate_review</span>
-            Leave a Review
-          </a>
+          {reviewPlatforms.map((platform, index) => (
+            <a
+              href={platform.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="review-btn"
+              style={`--btn-color: ${platform.color};`}
+              data-review-btn={index === 0 ? 'primary' : ''}
+            >
+              <span class="material-symbols-outlined">{platform.icon}</span>
+              {platform.name}
+            </a>
+          ))}
 
           <button id="review-dismiss-btn" class="review-btn-secondary">
             Maybe later
@@ -117,39 +143,43 @@ const hasReviewUrl = Boolean(settings.googleReviewUrl);
   .review-actions {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.625rem;
   }
 
-  .review-btn-primary {
+  .review-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     width: 100%;
-    padding: 0.875rem 1rem;
+    padding: 0.75rem 1rem;
     border-radius: var(--radius-lg);
-    background-color: var(--color-primary);
-    color: var(--color-bg);
+    background-color: var(--btn-color, var(--color-primary));
+    color: white;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.9375rem;
     text-decoration: none;
-    transition: background-color 0.2s;
+    transition: opacity 0.2s, transform 0.1s;
     border: none;
     cursor: pointer;
   }
 
-  .review-btn-primary:hover {
-    background-color: var(--color-primary-dark);
+  .review-btn:hover {
+    opacity: 0.9;
   }
 
-  .review-btn-primary .material-symbols-outlined {
+  .review-btn:active {
+    transform: scale(0.98);
+  }
+
+  .review-btn .material-symbols-outlined {
     font-size: 20px;
   }
 
   .review-btn-secondary {
     width: 100%;
     padding: 0.75rem 1rem;
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
     font-weight: 500;
     color: var(--color-text-secondary);
     background: transparent;
@@ -171,14 +201,14 @@ const hasReviewUrl = Boolean(settings.googleReviewUrl);
   } from '../lib/guestData';
 
   const overlay = document.getElementById('review-prompt-overlay');
-  const reviewBtn = document.getElementById('review-btn');
+  const reviewBtns = document.querySelectorAll('.review-btn');
   const dismissBtn = document.getElementById('review-dismiss-btn');
 
   function initReviewPrompt() {
     // Only show if onboarding was completed
     if (!hasSeenOnboarding()) return;
 
-    // Only show if it's after checkout date and not already shown
+    // Only show if it's checkout day (or after) and not already shown
     if (!shouldShowReviewPrompt()) return;
 
     overlay?.classList.remove('hidden');
@@ -189,9 +219,11 @@ const hasReviewUrl = Boolean(settings.googleReviewUrl);
     overlay?.classList.add('hidden');
   }
 
-  // Event listeners
-  reviewBtn?.addEventListener('click', () => {
-    closePrompt();
+  // Event listeners for all review buttons
+  reviewBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      closePrompt();
+    });
   });
 
   dismissBtn?.addEventListener('click', () => {
