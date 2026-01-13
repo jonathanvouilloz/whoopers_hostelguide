@@ -1,0 +1,471 @@
+---
+import '../styles/landing.css';
+
+const features = [
+  {
+    id: 'wifi',
+    title: 'Instant WiFi',
+    desc: 'One tap copy. No more spelling out "H0st3l_Gu3st" twenty times a day.',
+    icon: '📶',
+    color: 'bg-teal-50 text-teal-700'
+  },
+  {
+    id: 'food',
+    title: 'Local Gems',
+    desc: 'Your personal Google Maps lists for the best Pad Thai and rooftop bars.',
+    icon: '🍜',
+    color: 'bg-orange-50 text-orange-700'
+  },
+  {
+    id: 'events',
+    title: 'Social Life',
+    desc: 'Cooking classes, bar crawls, yoga. Guests sign up instantly.',
+    icon: '📅',
+    color: 'bg-purple-50 text-purple-700'
+  }
+];
+
+const painPoints = ["WiFi Password?", "Where is Laundry?", "Good Pad Thai?", "Rent Scooter?", "Check-out time?", "Taxi Number?", "Atm near?"];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HostelGuide — The Modern Digital Concierge</title>
+    <meta name="description" content="Upgrade your guest experience with a beautiful digital guide." />
+  </head>
+  <body class="antialiased selection:bg-[var(--color-thai-teal)] selection:text-white overflow-x-hidden">
+
+    <!-- FLOATING NAV -->
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 glass-panel rounded-full px-6 py-3 flex items-center gap-8 shadow-lg transition-all duration-300 hover:scale-[1.02] max-w-[90vw]">
+        <span class="font-display font-bold text-xl tracking-tight text-[var(--color-deep-slate)]">HostelGuide</span>
+        <div class="hidden md:flex gap-8 text-sm font-semibold text-[var(--color-cool-grey)]">
+            <a href="#how-it-works" class="hover:text-[var(--color-thai-teal)] transition-colors">How it works</a>
+            <a href="#features" class="hover:text-[var(--color-thai-teal)] transition-colors">Features</a>
+        </div>
+        <a href="https://cal.com" class="btn-primary text-xs px-5 py-2.5 shadow-md hover:shadow-lg">Book Demo</a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="relative flex flex-col items-center pt-40 md:pt-48 pb-16 overflow-hidden bg-[var(--color-pearl-50)] text-center">
+
+        <!-- Hero Content - Centered -->
+        <div class="max-w-4xl mx-auto px-6 mb-16 relative z-10">
+            <h1 class="text-[clamp(2.2rem,5vw,3.8rem)] font-display font-bold mb-6 text-balance leading-[1.1] tracking-[-0.02em] text-[var(--color-deep-slate)]">
+                your digital guest guide. <br>
+                <span class="font-editorial italic font-medium text-[1.15em] tracking-tight text-[var(--color-thai-teal)]">ready in 1 hour.</span>
+            </h1>
+
+            <p class="text-xl text-[var(--color-cool-grey)] mb-10 leading-relaxed max-w-2xl mx-auto">
+                Stop answering the same questions. Turn your reception desk into a beautiful digital brochure that fits in your guest's pocket.
+            </p>
+
+            <!-- CTAs -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+                <a href="https://cal.com" class="btn-primary text-lg px-8 py-4 shadow-lg shadow-teal-500/25 hover:shadow-xl">Start Free Trial</a>
+                <a href="#demo" class="btn-secondary text-lg">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><polygon points="10,8 16,12 10,16" fill="currentColor"/></svg>
+                    See Live Demo
+                </a>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="trust-badges">
+                <span class="trust-badge">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    No app download
+                </span>
+                <span class="trust-badge">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    Setup in 24h
+                </span>
+                <span class="trust-badge">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    Cancel anytime
+                </span>
+            </div>
+        </div>
+
+        <!-- HERO VISUAL COMPOSITION -->
+        <div class="hero-visual-wrapper">
+            <!-- Background decorative rectangles -->
+            <div class="hero-bg-rectangle left hidden lg:block"></div>
+            <div class="hero-bg-rectangle right hidden lg:block"></div>
+
+            <!-- Main container with text + phone -->
+            <div class="hero-main-container">
+                <!-- Text content -->
+                <div class="hero-main-content">
+                    <h3>your local guide</h3>
+                    <p>Share your favorite restaurants, bars, and hidden gems with your guests. Google Maps integration makes navigation effortless.</p>
+                    <a href="#features" class="learn-more">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l4 4-4 4"/></svg>
+                        Learn more
+                    </a>
+                </div>
+
+                <!-- Phone mockup -->
+                <div class="hero-phone-wrapper">
+                    <div class="phone-mockup w-[260px] h-[520px] bg-gray-900 rounded-[2.5rem] p-2.5 shadow-2xl border-4 border-gray-800">
+                        <div class="w-full h-full bg-white rounded-[2rem] overflow-hidden relative flex flex-col">
+                            <!-- Phone Header -->
+                            <div class="bg-[var(--color-thai-teal)] p-4 pt-8 text-white">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div>
+                                        <h4 class="font-display font-bold text-xl">Stitch Hostel</h4>
+                                        <p class="opacity-80 text-xs">Chiang Mai</p>
+                                    </div>
+                                    <div class="w-8 h-8 bg-white/20 backdrop-blur rounded-full flex items-center justify-center text-sm">☀️</div>
+                                </div>
+                            </div>
+
+                            <!-- Phone Content -->
+                            <div class="flex-1 p-4 space-y-3 bg-gray-50">
+                                <div class="bg-white rounded-xl p-3 shadow-sm border border-gray-100">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <div class="w-6 h-6 bg-teal-50 text-teal-600 rounded-full flex items-center justify-center text-xs">📶</div>
+                                        <span class="text-xs font-semibold text-gray-800">WiFi Password</span>
+                                    </div>
+                                    <div class="bg-gray-50 px-3 py-1.5 rounded-lg font-mono text-sm text-center">ilovehostels</div>
+                                </div>
+
+                                <div class="bg-white rounded-xl p-3 shadow-sm border border-gray-100">
+                                    <div class="text-xs font-semibold text-gray-800 mb-2">Staff Picks</div>
+                                    <div class="flex gap-2">
+                                        <div class="flex-1 bg-orange-50 rounded-lg p-2 text-center">
+                                            <span class="text-lg">🍜</span>
+                                            <div class="text-[9px] font-medium text-gray-600">Food</div>
+                                        </div>
+                                        <div class="flex-1 bg-purple-50 rounded-lg p-2 text-center">
+                                            <span class="text-lg">🍸</span>
+                                            <div class="text-[9px] font-medium text-gray-600">Bars</div>
+                                        </div>
+                                        <div class="flex-1 bg-blue-50 rounded-lg p-2 text-center">
+                                            <span class="text-lg">🛵</span>
+                                            <div class="text-[9px] font-medium text-gray-600">Transport</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-xl p-3 shadow-sm border border-gray-100">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-xs font-semibold text-gray-800">Today's Event</span>
+                                        <span class="text-[10px] bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full font-medium">5 PM</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">🧘‍♀️</div>
+                                        <div>
+                                            <div class="text-xs font-semibold">Sunset Yoga</div>
+                                            <div class="text-[10px] text-gray-500">Rooftop terrace</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Proof -->
+        <div class="mt-20 text-center px-6">
+            <p class="text-sm text-[var(--color-cool-grey)] mb-6">Trusted by hostels across Southeast Asia</p>
+            <div class="logo-bar">
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder hidden sm:block"></div>
+                <div class="logo-placeholder hidden md:block"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- PAIN POINTS MARQUEE -->
+    <section class="py-12 bg-white border-y border-gray-100 overflow-hidden relative">
+        <div class="marquee-container">
+            <div class="marquee-content">
+                {[...painPoints, ...painPoints, ...painPoints].map((point) => (
+                     <span class="text-3xl font-display font-bold text-gray-200 flex items-center gap-4">
+                        {point} <span class="w-2 h-2 rounded-full bg-[var(--color-thai-teal)] opacity-30"></span>
+                    </span>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- STICKY PHONE / HOW IT WORKS -->
+    <section id="how-it-works" class="py-32 relative bg-[var(--color-pearl-50)]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-24">
+                <h2 class="text-[clamp(2rem,4vw,3.2rem)] title-duo mb-6 text-[var(--color-deep-slate)]">your digital <span>front desk.</span></h2>
+                <p class="text-xl text-[var(--color-cool-grey)]">Everything your guests need, organized in one beautiful link.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Sticky Phone Wrapper -->
+                <div class="relative hidden lg:block h-[150vh]"> 
+                    <div class="sticky top-32 flex justify-center">
+                        <div class="relative w-[320px] h-[650px] bg-gray-900 rounded-[3rem] p-3 shadow-2xl border-4 border-gray-800">
+                             <div class="w-full h-full bg-white rounded-[2.5rem] overflow-hidden relative flex flex-col">
+                                <!-- Dynamic Content Area -->
+                                <div id="phone-content-wifi" class="absolute inset-0 bg-white flex flex-col items-center justify-center p-8 text-center transition-all duration-500 opacity-100 scale-100">
+                                    <div class="w-24 h-24 bg-teal-50 text-teal-600 rounded-full flex items-center justify-center text-4xl mb-6">📶</div>
+                                    <h3 class="font-bold text-2xl mb-2">Network: Hostel_Guest</h3>
+                                    <div class="bg-gray-50 px-4 py-2 rounded-lg font-mono text-lg mb-8 border border-gray-100">password123</div>
+                                    <button class="w-full btn-primary py-3 shadow-none">Copy Password</button>
+                                </div>
+                                <div id="phone-content-food" class="absolute inset-0 bg-white flex flex-col p-6 transition-all duration-500 opacity-0 scale-95 overflow-hidden">
+                                    <h3 class="font-bold text-xl mb-6">Staff Picks</h3>
+                                    <div class="space-y-4">
+                                        <div class="flex gap-4 items-start bg-gray-50 p-3 rounded-xl">
+                                            <div class="w-12 h-12 bg-gray-200 rounded-lg flex-shrink-0"></div>
+                                            <div>
+                                                <div class="font-bold text-sm">Khao Soi Mae Sai</div>
+                                                <div class="text-xs text-gray-500">Best curry noodles.</div>
+                                            </div>
+                                        </div>
+                                         <div class="flex gap-4 items-start bg-gray-50 p-3 rounded-xl">
+                                            <div class="w-12 h-12 bg-gray-200 rounded-lg flex-shrink-0"></div>
+                                            <div>
+                                                <div class="font-bold text-sm">Zoe in Yellow</div>
+                                                <div class="text-xs text-gray-500">Legendary bar.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div id="phone-content-events" class="absolute inset-0 bg-white flex flex-col p-6 transition-all duration-500 opacity-0 scale-95">
+                                    <h3 class="font-bold text-xl mb-6">Weekly Events</h3>
+                                    <div class="bg-purple-50 p-4 rounded-xl border border-purple-100 mb-4">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <div class="font-bold text-purple-900">Cooking Class</div>
+                                            <span class="bg-white text-purple-800 text-[10px] px-2 py-1 rounded font-bold">Today</span>
+                                        </div>
+                                        <p class="text-xs text-purple-700 mb-3">Learn to cook Pad Thai with Mama Noi.</p>
+                                        <button class="w-full bg-purple-600 text-white py-2 rounded-lg text-xs font-bold">Sign Up</button>
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scrollable Features -->
+                <div class="space-y-32 py-20">
+                    {features.map((feature) => (
+                        <div class="feature-step min-h-[40vh] flex flex-col justify-center" data-target={feature.id}>
+                            <div class={`w-16 h-16 rounded-2xl ${feature.color} flex items-center justify-center text-3xl mb-6 shadow-sm`}>
+                                {feature.icon}
+                            </div>
+                            <h3 class="text-4xl font-display font-bold mb-4">{feature.title}</h3>
+                            <p class="text-xl text-[var(--color-cool-grey)] leading-relaxed max-w-md">{feature.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENTO GRID -->
+    <section id="features" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-[clamp(2rem,4vw,3.2rem)] title-duo text-center mb-16 text-[var(--color-deep-slate)]">packed with <span>value.</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 h-auto md:h-[600px]">
+                
+                <!-- Large Card 1 -->
+                <div class="bento-card md:col-span-2 bg-[var(--color-pearl-50)] p-8 flex flex-col justify-between group">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">zero app download</h3>
+                        <p class="text-[var(--color-cool-grey)]">It's just a link. Works on iPhone, Android, and Grandma's iPad.</p>
+                    </div>
+                    <div class="flex gap-4 mt-8">
+                        <div class="bg-white px-4 py-2 rounded-lg shadow-sm font-mono text-sm border border-gray-100 group-hover:scale-105 transition-transform text-[var(--color-thai-teal)]">hostel.guide/stitch</div>
+                    </div>
+                    <div class="absolute right-0 bottom-0 opacity-5 text-[10rem]">📱</div>
+                </div>
+
+                <!-- Tall Card -->
+                <div class="bento-card bg-gradient-to-br from-[var(--color-deep-slate)] to-slate-800 text-white p-8 flex flex-col md:row-span-2">
+                    <div class="relative z-10 mb-auto">
+                        <h3 class="text-2xl font-bold mb-2">your brand</h3>
+                        <p class="text-white/80">Upload your logo, pick your colors. Make it yours.</p>
+                    </div>
+                    <!-- Decorative accent -->
+                    <div class="absolute top-6 right-6 w-16 h-16 rounded-2xl bg-[var(--color-thai-teal)] flex items-center justify-center text-2xl shadow-lg">🎨</div>
+
+                    <div class="relative z-10 mt-auto space-y-3">
+                        <div class="flex gap-3">
+                            <div class="w-10 h-10 rounded-full bg-[var(--color-thai-teal)]"></div>
+                            <div class="w-10 h-10 rounded-full bg-orange-400"></div>
+                            <div class="w-10 h-10 rounded-full bg-purple-400"></div>
+                        </div>
+                        <div class="h-10 bg-white/10 backdrop-blur rounded-xl w-full flex items-center px-4 gap-3">
+                            <div class="w-6 h-6 rounded bg-white/20"></div>
+                            <span class="text-sm font-medium text-white/70">Your Hostel Name</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Small Card 2 -->
+                <div class="bento-card bg-orange-50 p-8 flex flex-col justify-center items-center text-center">
+                    <div class="text-4xl mb-4">🚀</div>
+                    <h3 class="text-xl font-bold">setup in 24h</h3>
+                    <p class="text-sm text-gray-500 mt-2">We build it for you.</p>
+                </div>
+
+                <!-- Small Card 3 -->
+                <div class="bento-card bg-blue-50 p-8 flex flex-col justify-center items-center text-center">
+                     <div class="text-4xl mb-4">💬</div>
+                    <h3 class="text-xl font-bold">whatsapp support</h3>
+                    <p class="text-sm text-gray-500 mt-2">Real humans, real help.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="py-24 bg-white relative overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23008080&quot; fill-opacity=&quot;1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+
+        <div class="max-w-5xl mx-auto px-6 relative">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(2rem,4vw,3.2rem)] title-duo mb-4">simple <span>pricing.</span></h2>
+                <p class="text-[var(--color-cool-grey)]">No hidden fees. No contracts. Just value.</p>
+            </div>
+
+            <!-- Ticket-style pricing card -->
+            <div class="relative max-w-3xl mx-auto">
+                <div class="bg-gradient-to-br from-[var(--color-thai-teal)] via-teal-600 to-teal-700 rounded-3xl shadow-2xl shadow-teal-900/20 overflow-hidden">
+                    <div class="flex flex-col md:flex-row">
+                        <!-- Left section - Main info -->
+                        <div class="flex-1 p-8 md:p-10 text-white relative">
+                            <!-- Decorative badge -->
+                            <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium mb-6">
+                                <span class="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></span>
+                                first month free
+                            </div>
+
+                            <!-- Price -->
+                            <div class="mb-6">
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-7xl md:text-8xl font-bold tracking-tight">$10</span>
+                                    <div class="text-white/70">
+                                        <div class="text-lg font-medium">/month</div>
+                                        <div class="text-sm">after trial</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Features inline -->
+                            <div class="flex flex-wrap gap-3 mb-8">
+                                <span class="bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg text-sm">full setup included</span>
+                                <span class="bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg text-sm">unlimited updates</span>
+                                <span class="bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg text-sm">qr materials</span>
+                                <span class="bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg text-sm">whatsapp support</span>
+                            </div>
+
+                            <!-- CTA -->
+                            <a href="https://cal.com" class="inline-flex items-center justify-center gap-2 bg-white text-teal-700 font-bold px-8 py-4 rounded-full text-lg hover:bg-gray-50 hover:scale-[1.02] transition-all shadow-lg">
+                                start free trial
+                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                            </a>
+                        </div>
+
+                        <!-- Perforated divider -->
+                        <div class="hidden md:flex flex-col items-center justify-center w-8 relative">
+                            <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] border-l-2 border-dashed border-white/30"></div>
+                            <div class="w-8 h-8 bg-white rounded-full -mt-4 relative z-10"></div>
+                            <div class="flex-1"></div>
+                            <div class="w-8 h-8 bg-white rounded-full -mb-4 relative z-10"></div>
+                        </div>
+
+                        <!-- Right section - Ticket stub -->
+                        <div class="md:w-48 bg-white/10 backdrop-blur-sm p-6 md:p-8 flex flex-col items-center justify-center text-center text-white border-t md:border-t-0 md:border-l border-white/20">
+                            <div class="text-5xl mb-3">🎫</div>
+                            <div class="text-xs uppercase tracking-wider text-white/70 mb-1">your pass to</div>
+                            <div class="font-bold text-lg leading-tight">happy guests</div>
+                            <div class="mt-4 text-xs text-white/50">cancel anytime</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating elements -->
+                <div class="absolute -top-4 -right-4 w-20 h-20 bg-amber-400 rounded-2xl rotate-12 flex items-center justify-center text-2xl shadow-lg hidden lg:flex">
+                    ✨
+                </div>
+            </div>
+
+            <!-- Trust note -->
+            <p class="text-center text-sm text-[var(--color-cool-grey)] mt-10">
+                Join 50+ hostels already using HostelGuide
+            </p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[var(--color-deep-slate)] text-white py-20 rounded-t-[3rem] mt-20">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <h2 class="font-display text-3xl mb-2 font-bold tracking-tight">HostelGuide</h2>
+                <p class="text-white/40">Made with ☀️ in Chiang Mai.</p>
+            </div>
+            <div class="flex gap-8">
+                <a href="#" class="text-white/60 hover:text-white transition-colors">Twitter</a>
+                <a href="#" class="text-white/60 hover:text-white transition-colors">Instagram</a>
+                <a href="mailto:hello@hostelguide.app" class="text-white/60 hover:text-white transition-colors">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVITY SCRIPTS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sticky Phone Logic (Keep existing)
+            const steps = document.querySelectorAll('.feature-step');
+            const phoneScreens = {
+                wifi: document.getElementById('phone-content-wifi'),
+                food: document.getElementById('phone-content-food'),
+                events: document.getElementById('phone-content-events')
+            };
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-40% 0px -40% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const targetId = entry.target.getAttribute('data-target');
+                        if (!targetId) return;
+                        
+                        // Hide all
+                        Object.values(phoneScreens).forEach(el => {
+                            if(el) {
+                                el.style.opacity = '0';
+                                el.style.transform = 'scale(0.95)';
+                                el.style.zIndex = '0';
+                            }
+                        });
+
+                        // Show target
+                        // @ts-ignore
+                        const activeScreen = phoneScreens[targetId];
+                        if (activeScreen) {
+                            activeScreen.style.opacity = '1';
+                            activeScreen.style.transform = 'scale(1)';
+                            activeScreen.style.zIndex = '10';
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            steps.forEach(step => observer.observe(step));
+        });
+    </script>
+  </body>
+</html>
