@@ -23,7 +23,7 @@
     {
       "name": "Aroy Dee",
       "tagline": "Best Khao Soi",
-      "description": "description",
+      "description": "A very good place to get Khao Soi, morning glory and many other thai dishes. Crowdy around dinner and lunch time.",
       "cuisineType": "thai",
       "priceRange": "€",
       "address": "157 Mun Mueang Rd, Tambon Si Phum, Mueang Chiang Mai District, Chiang Mai 50300",
@@ -38,6 +38,22 @@
         "exceptions": {
           "sunday": "closed"
         }
+      }
+    },
+    {
+      "name": "อาหารตามสั่งอ้ายแก้ว",
+      "tagline": "Near the hostel, cheap and yummy",
+      "description": "Very good small restaurant 5min walk near the hostel.",
+      "cuisineType": "thai",
+      "priceRange": "€",
+      "address": "RX59+7QQ, Unnamed Road, Mueang Chiang Mai District, Chiang Mai 50300",
+      "location": {
+        "lat": 18.8121088,
+        "lng": 98.9691904
+      },
+      "image": "public/images/spots/nearhostel.jpg",
+      "openingHours": {
+        "default": "9:30-20:00"
       }
     }
   ]
